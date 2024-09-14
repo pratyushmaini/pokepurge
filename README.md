@@ -214,10 +214,6 @@ This project is licensed under the MIT License.
 
 ---
 
-Let's make this challenge exciting and insightful! Good luck to all teams!
-
----
-
 # Additional Instructions
 
 - **Students** should implement their strategies within the provided classes and modules.
@@ -253,11 +249,5 @@ The leaderboard is automatically updated each time `main.py` is run. It reads fr
 - **Documentation**: Comment your code thoroughly to explain your implementations.
 - **Ethical Compliance**: Do not include any disallowed or unethical content in your code or submissions.
 - **Testing**: Test your code thoroughly before submitting to ensure it runs without errors.
-
----
-
-# Let's Get Started!
-
-Fork this repository, choose your team, and start implementing your strategies. May the best team win!
 
 ---
