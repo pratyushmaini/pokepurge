@@ -1,7 +1,7 @@
 # main.py
 
 import torch
-from diffusers import StableDiffusionPipeline
+from diffusers import FluxPipeline
 import methods.input_filters as input_filters_module
 import methods.output_filters as output_filters_module
 import methods.model_modifications as model_modifications_module
@@ -23,11 +23,24 @@ def main():
     parser.add_argument('--team_name', type=str, default='TeamDefault', help='Your team name for the leaderboard')
     args = parser.parse_args()
 
-    # Load the FLUX.1-schnell model
+    # Load the FLUX.1-schnell model using FluxPipeline
     print("Loading the FLUX.1-schnell model...")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model_id = "black-forest-labs/FLUX.1-schnell"
-    pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+
+    # Ensure torch_dtype is set correctly
+    torch_dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+
+    # Load the pipeline
+    pipe = FluxPipeline.from_pretrained(
+        model_id,
+        torch_dtype=torch_dtype
+    )
+
+    # Optional: Offload model to CPU to save VRAM
+    if not torch.cuda.is_available():
+        pipe.enable_model_cpu_offload()
+
     pipe = pipe.to(device)
 
     # Apply Blue Team methods
@@ -50,7 +63,15 @@ def main():
 
     # Generate image
     print(f"Generating image for prompt: {filtered_prompt}")
-    image = pipe(filtered_prompt).images[0]
+    generator = torch.Generator(device=device).manual_seed(0)
+    with torch.autocast(device.type):
+        image = pipe(
+            filtered_prompt,
+            guidance_scale=0.0,
+            num_inference_steps=4,
+            max_sequence_length=256,
+            generator=generator
+        ).images[0]
 
     # Save image
     output_dir = 'outputs'

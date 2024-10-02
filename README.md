@@ -202,7 +202,7 @@ The leaderboard will be automatically generated based on the evaluation metrics.
 ## Resources
 
 - **FLUX.1-schnell Model**: [Hugging Face Repository](https://huggingface.co/black-forest-labs/FLUX.1-schnell)
-- **Relevant Paper**: ["Selective Amnesia: On Efficiently Forgetting Transformers"](https://arxiv.org/abs/2303.07345)
+- **Relevant Paper**: ["Erasing Concepts from Diffusion Models"](https://arxiv.org/abs/2303.07345)
 - **Diffusers Library**: [Hugging Face Diffusers](https://github.com/huggingface/diffusers)
 - **Top 100 Pokémon List**: Provided in `data/top_100_pokemon.txt`
 
