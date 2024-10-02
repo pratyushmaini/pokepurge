@@ -4,5 +4,8 @@ class BaseMethod:
     def __init__(self):
         pass
 
-    def apply(self, *args, **kwargs):
-        raise NotImplementedError("Method 'apply' must be implemented in subclasses.")
+    def apply(self, input_data):
+        """
+        Apply the method to the input data.
+        """
+        return input_data

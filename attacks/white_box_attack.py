@@ -3,10 +3,12 @@
 from .base_attack import BaseAttack
 
 class WhiteBoxAttack(BaseAttack):
-    def __init__(self, model):
-        self.model = model
+    def __init__(self):
+        super().__init__()
 
-    def execute(self, prompt):
-        # Implement white box attack logic
-        # Access internal components of the model
-        return self.model.generate(prompt)
+    def apply(self, model):
+        """
+        Implement a white box attack to modify the model.
+        """
+        # Placeholder for white box attack logic
+        return model

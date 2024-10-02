@@ -4,5 +4,8 @@ class BaseAttack:
     def __init__(self):
         pass
 
-    def execute(self, *args, **kwargs):
-        raise NotImplementedError("Method 'execute' must be implemented in subclasses.")
+    def apply(self, input_data):
+        """
+        Apply attack to the input data to bypass defenses.
+        """
+        return input_data
