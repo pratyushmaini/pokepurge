@@ -39,6 +39,7 @@ class SimpleWordFilter(InputFilter):
             forbidden_words = []
         return forbidden_words
 
+
 class RegexFilter(InputFilter):
     def __init__(self):
         super().__init__()
@@ -60,8 +61,12 @@ class RegexFilter(InputFilter):
         forbidden_words = self.load_forbidden_words()
         patterns = []
         for word in forbidden_words:
-            # Pattern to match variations like 'Pikachu', 'Pika-chu', 'Pika chu'
-            pattern = r'\b' + re.sub(r'[\s-]', r'[\s-]?', re.escape(word)) + r'\b'
+            # Split the word on spaces or hyphens
+            parts = re.split(r'[\s-]', word)
+            # Escape each part
+            escaped_parts = [re.escape(part) for part in parts if part]
+            # Join with optional [\s-]? between parts
+            pattern = r'\b' + r'[\s-]?'.join(escaped_parts) + r'\b'
             patterns.append(pattern)
         return patterns
 
