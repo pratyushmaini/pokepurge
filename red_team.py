@@ -12,6 +12,7 @@ class RedTeam:
 
     def load_model(self):
         # Load the diffusion model
+        
         pass
 
     def run(self):

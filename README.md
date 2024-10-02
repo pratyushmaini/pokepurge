@@ -137,6 +137,7 @@ pokemon-purge-challenge/
 3. **Install the Required Packages**:
 
    ```bash
+   conda create -n pokepurge python=3.12
    pip install -r requirements.txt
    ```
 

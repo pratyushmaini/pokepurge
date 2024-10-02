@@ -3,17 +3,13 @@
 from .base_metric import BaseMetric
 
 class ContentDetectionMetric(BaseMetric):
-    def __init__(self, forbidden_content):
-        self.forbidden_content = forbidden_content
+    def __init__(self):
+        super().__init__()
 
-    def evaluate(self, images):
-        # Implement content detection logic
-        detected = 0
-        for image in images:
-            if self.detect_forbidden_content(image):
-                detected += 1
-        return detected
-
-    def detect_forbidden_content(self, image):
-        # Placeholder for actual detection logic
-        return False
+    def evaluate(self, image):
+        """
+        Evaluate whether the image contains forbidden content.
+        """
+        # Placeholder for content detection logic
+        # For the baseline, we can return 0.0 (no forbidden content detected)
+        return 0.0

@@ -5,3 +5,10 @@ __pycache__/
 *.jpeg
 model/
 data/generated_images/
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+# Ignore model cache
+cache/
+# Ignore outputs
+outputs/
