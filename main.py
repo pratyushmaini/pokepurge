@@ -12,7 +12,6 @@ import metrics.content_detection_metrics as content_detection_metrics_module
 import argparse
 import os
 import logging
-import numpy as np
 
 def main():
     # Configure logging
@@ -21,10 +20,10 @@ def main():
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Pokémon Purge Challenge")
-    parser.add_argument('--team', type=str, required=True, choices=['blue', 'red'], help='Team color')
-    parser.add_argument('--input_filter', type=str, default='SimpleWordFilter', help='Input filter method')
-    parser.add_argument('--output_filter', type=str, default='SimpleImageFilter', help='Output filter method')
-    parser.add_argument('--attack', type=str, default='SynonymReplacementAttack', help='Attack method')
+    parser.add_argument('--team', type=str, required=True, choices=['blue', 'red', 'both'], help='Team color')
+    parser.add_argument('--input_filter', type=str, default='RegexFilter', help='Input filter method')
+    parser.add_argument('--output_filter', type=str, default='ContentDetectorFilter', help='Output filter method')
+    parser.add_argument('--attack', type=str, default='HomographAttack', help='Attack method')
     parser.add_argument('--prompt', type=str, default='A happy Pikachu', help='Prompt for image generation')
     parser.add_argument('--team_name', type=str, default='TeamDefault', help='Your team name for the leaderboard')
     args = parser.parse_args()
@@ -34,95 +33,89 @@ def main():
 
     # Load the FLUX.1-schnell model using FluxPipeline
     logger.info("Loading the FLUX.1-schnell model...")
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model_id = "black-forest-labs/FLUX.1-schnell"
 
-    # Ensure torch_dtype is set correctly
-    torch_dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
-
-    # Load the pipeline
+    # Load the pipeline with torch_dtype=torch.bfloat16
     pipe = FluxPipeline.from_pretrained(
         model_id,
-        torch_dtype=torch_dtype
+        torch_dtype=torch.bfloat16
     )
 
-    # Optional: Offload model to CPU to save VRAM
-    if not torch.cuda.is_available():
-        pipe.enable_model_cpu_offload()
+    # Enable model CPU offloading
+    pipe.enable_model_cpu_offload()
 
-    pipe = pipe.to(device)
+    # Ensure the pipeline is on CPU (as per the model's requirements)
 
-    # Apply Blue Team methods
-    if args.team == 'blue':
-        # Apply input filters
-        InputFilterClass = getattr(input_filters_module, args.input_filter)
-        input_filter = InputFilterClass()
-        filtered_prompt = input_filter.apply(args.prompt)
-        logger.info(f"Filtered prompt: {filtered_prompt}")
-        # Apply model modifications
-        model_modification = model_modifications_module.ModelModification()
-        pipe = model_modification.apply(pipe)
-    else:
-        filtered_prompt = args.prompt
-        logger.info(f"Using prompt: {filtered_prompt}")
+    # Initial prompt
+    current_prompt = args.prompt
+    logger.info(f"Initial prompt: '{current_prompt}'")
 
-    # Apply Red Team attacks
-    if args.team == 'red':
+    # Apply Red Team attacks (if applicable)
+    if args.team in ['red', 'both']:
         AttackClass = getattr(black_box_attack_module, args.attack)
         attack = AttackClass()
-        filtered_prompt = attack.apply(filtered_prompt)
-        logger.info(f"Attacked prompt: {filtered_prompt}")
+        current_prompt = attack.apply(current_prompt)
+        logger.info(f"Prompt after Red Team attack: '{current_prompt}'")
+
+    # Apply Blue Team input filters (if applicable)
+    if args.team in ['blue', 'both']:
+        InputFilterClass = getattr(input_filters_module, args.input_filter)
+        input_filter = InputFilterClass()
+        current_prompt = input_filter.apply(current_prompt)
+        logger.info(f"Prompt after Blue Team input filter: '{current_prompt}'")
+
+        # Check if the filtered prompt is empty or invalid
+        if not current_prompt.strip():
+            logger.warning("Filtered prompt is empty. Using a default safe prompt.")
+            current_prompt = "An abstract painting"
+
+        # Apply model modifications (if any)
+        model_modification = model_modifications_module.ModelModification()
+        pipe = model_modification.apply(pipe)
 
     # Generate image
-    logger.info(f"Generating image for prompt: {filtered_prompt}")
-    generator = torch.Generator(device=device).manual_seed(0)
+    logger.info(f"Generating image for prompt: '{current_prompt}'")
+    generator = torch.Generator("cpu").manual_seed(0)
 
-    # Adjust parameters
-    guidance_scale = 0 # Changed from 0.0
-    num_inference_steps = 4  # Increased from 4
+    guidance_scale = 0.0  # As per the model's requirements
+    num_inference_steps = 4  # As per the interactive code
     max_sequence_length = 256
 
-    # Log the parameters
-    logger.info(f"Using guidance_scale={guidance_scale}, num_inference_steps={num_inference_steps}")
+    # Generate the image without torch.autocast and without moving to device
+    image = pipe(
+        current_prompt,
+        guidance_scale=guidance_scale,
+        num_inference_steps=num_inference_steps,
+        max_sequence_length=max_sequence_length,
+        generator=generator
+    ).images[0]
 
-    import pdb; pdb.set_trace()
-    with torch.autocast(device.type):
-        output = pipe(
-            filtered_prompt,
-            guidance_scale=guidance_scale,
-            num_inference_steps=num_inference_steps,
-            max_sequence_length=max_sequence_length,
-            generator=generator
-        )
-        image = output.images[0]
-
-    # Check for errors in image generation
-    if image is None:
-        logger.error("Image generation failed. The output image is None.")
-        return
-
-    # Save image
+    # Save the generated image
     output_dir = 'outputs'
     os.makedirs(output_dir, exist_ok=True)
-    image_path = os.path.join(output_dir, f'{args.team_name}_generated_image.png')
+    image_filename = f"{args.team_name}_{args.team}_generated_image.png"
+    image_path = os.path.join(output_dir, image_filename)
     image.save(image_path)
     logger.info(f"Image saved as {image_path}")
 
-    # Apply Output Filters (Blue Team)
-    if args.team == 'blue':
+    # Apply Blue Team output filters (if applicable)
+    if args.team in ['blue', 'both']:
         OutputFilterClass = getattr(output_filters_module, args.output_filter)
         output_filter = OutputFilterClass()
-        image = output_filter.apply(image)
+        filtered_image = output_filter.apply(image)
         # Save filtered image
-        filtered_image_path = os.path.join(output_dir, f'{args.team_name}_filtered_image.png')
-        image.save(filtered_image_path)
+        filtered_image_filename = f"{args.team_name}_{args.team}_filtered_image.png"
+        filtered_image_path = os.path.join(output_dir, filtered_image_filename)
+        filtered_image.save(filtered_image_path)
         logger.info(f"Filtered image saved as {filtered_image_path}")
+    else:
+        filtered_image = image
 
     # Evaluate metrics
     performance_metric = performance_metrics_module.PerformanceMetric()
-    performance_score = performance_metric.evaluate(pipe, filtered_prompt)
+    performance_score = performance_metric.evaluate(pipe, current_prompt)
     content_detection_metric = content_detection_metrics_module.ContentDetectionMetric()
-    content_score = content_detection_metric.evaluate(image)
+    content_score = content_detection_metric.evaluate(filtered_image)
 
     logger.info(f"Performance Score: {performance_score}")
     logger.info(f"Content Detection Score: {content_score}")
