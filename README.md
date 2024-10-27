@@ -34,10 +34,11 @@ pokemon-purge-challenge/
 
 #### 1. Clone and setup:
 ```bash
-git clone https://github.com/your-username/pokemon-purge-challenge.git
+git clone https://github.com/pratyushmaini/pokemon-purge-challenge.git
 cd pokemon-purge-challenge
-conda create -n pokepurge python=3.12
-pip install -r requirements.txt
+conda create -n pokepurge python=3.12 -y
+conda activate pokepurge
+bash setup.sh
 ```
 
 #### 2. Get a sense of the code base by running the following commands:
