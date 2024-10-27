@@ -43,11 +43,12 @@ bash setup.sh
 
 #### 2. Get a sense of the code base by running the following commands:
 ```bash
+python main.py --red NoAttackTeam --blue NoDefenseTeam --prompt "A pikachu in the wild"
 python main.py --red BaseAttackTeam --blue BaseDefenseTeam --prompt "A pikachu in the wild"
 python main.py --red BaseAttackTeam --blue BaseDefenseTeam --prompt "A cute yellow mouse"
 python main.py --red BaseAttackTeam --blue BaseDefenseTeam --prompt "A cute yellow electric mouse with lightning tail and blush cheeks"
 ```
-These three examples will run the base attack and defense teams on the given prompts. The first and third prompt should be filtered out. The second prompt should be generated, but it would not resemble a Pikachu.
+These three examples will run the base attack and defense teams on the given prompts. The second and fourth prompt should be filtered out. The 1st, 3rd prompt should be generated, but the 3rd would not resemble a Pikachu.
 
 
 #### 3. Implement your strategy:

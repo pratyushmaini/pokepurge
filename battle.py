@@ -16,7 +16,7 @@ class BlueTeam:
     
     def _load_method(self, method_type, method_category):
         """Dynamically load method class from config"""
-        if method_type not in self.config:
+        if method_type not in self.config or self.config[method_type] is None:
             return None
             
         method_name = self.config[method_type]
@@ -46,7 +46,7 @@ class RedTeam:
     
     def _load_attack(self):
         """Dynamically load attack method"""
-        if 'attack' not in self.config:
+        if 'attack' not in self.config or self.config['attack'] is None:
             return None
             
         attack_name = self.config['attack']

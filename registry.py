@@ -18,17 +18,26 @@ BASELINE_METHODS = {
 
 # Baseline team configurations using only implemented methods
 BASELINE_TEAMS = {
-    'BaseDefenseTeam': {
-        'type': 'blue',
-        'input_filter': 'BaseRegexFilter',
-        'output_filter': 'BaseContentDetector',
-        # 'model_mod': 'BaseModelPatch'
-    },
-    'BaseAttackTeam': {
-        'type': 'red',
-        'attack': 'BaseHomographAttack'
-    }
+   'BaseDefenseTeam': {
+       'type': 'blue',
+       'input_filter': 'BaseRegexFilter',
+       'output_filter': 'BaseContentDetector'
+   },
+   'NoDefenseTeam': {
+       'type': 'blue',
+       'input_filter': None,
+       'output_filter': None
+   },
+   'BaseAttackTeam': {
+       'type': 'red',
+       'attack': 'BaseHomographAttack'
+   },
+   'NoAttackTeam': {
+       'type': 'red',
+       'attack': None
+   }
 }
+
 
 # Students can register their teams here
 STUDENT_TEAMS = {
