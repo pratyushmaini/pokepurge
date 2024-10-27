@@ -65,5 +65,20 @@ These three examples will run the base attack and defense teams on the given pro
 - [Erasing Concepts Paper](https://arxiv.org/abs/2303.07345)
 - [Hugging Face Diffusers](https://github.com/huggingface/diffusers)
 
+## Timeline
+
+### Team Registration (Oct 29)
+- Sign up on course Slack in teams of 2-3 students.
+- Study baseline implementations in provided code
+
+### Mid-Challenge Check (Nov 7)
+- 5-minute team presentations of strategies
+- Quick battles against baseline implementations
+- Technical support and feedback session
+
+### Final Competition (Nov 12)
+- Live battles between teams
+- Discussion of successful strategies
+
 ## License
 MIT License
