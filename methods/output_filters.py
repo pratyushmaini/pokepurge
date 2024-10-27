@@ -1,12 +1,9 @@
-# methods/output_filters.py
-
 from .base_method import BaseMethod
-from PIL import Image, ImageFilter
+from PIL import Image
 import torch
+import open_clip
 import torchvision.transforms as transforms
-import torchvision.models as models
-import torch.nn.functional as F
-import os
+import numpy as np
 
 class OutputFilter(BaseMethod):
     def __init__(self):
@@ -17,112 +14,82 @@ class OutputFilter(BaseMethod):
         Base method; returns the image unchanged.
         """
         return image
-
-class SimpleImageFilter(OutputFilter):
-    def __init__(self):
-        super().__init__()
-
-    def apply(self, image):
-        """
-        Applies a blur if the image is too bright.
-        """
-        brightness = self.calculate_brightness(image)
-        if brightness > 150:  # Arbitrary threshold
-            print("SimpleImageFilter: Image brightness is high; applying blur.")
-            image = image.filter(ImageFilter.GaussianBlur(radius=5))
-        return image
-
-    def calculate_brightness(self, image):
-        grayscale = image.convert('L')
-        histogram = grayscale.histogram()
-        pixels = sum(histogram)
-        brightness = scale = len(histogram)
-        for index in range(scale):
-            ratio = histogram[index] / pixels
-            brightness += ratio * (-scale + index)
-        return brightness / scale
-
+        
 class ContentDetectorFilter(OutputFilter):
-    def __init__(self):
+    def __init__(self, similarity_threshold=0.6):
         super().__init__()
-        self.model = self.load_model()
-        self.transform = self.get_transform()
-        self.forbidden_labels = self.load_forbidden_labels()
+        # Load CLIP model and preprocessing
+        self.model, _, self.preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k')
+        self.tokenizer = open_clip.get_tokenizer('ViT-B-32')
+        self.similarity_threshold = similarity_threshold
+        self.forbidden_names = self.load_forbidden_names()
+        
+        # Move model to GPU if available
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = self.model.to(self.device)
+        self.model.eval()
+
+    def load_forbidden_names(self):
+        """
+        Loads list of forbidden Pokémon names from file
+        """
+        try:
+            with open('data/famous_pokemons.txt', 'r') as f:
+                names = [line.strip() for line in f.readlines()]
+            return names
+        except FileNotFoundError:
+            print("Warning: famous_pokemons.txt not found. Using empty list.")
+            return []
+
+    def create_black_image(self, original_image):
+        """
+        Creates a black image with same dimensions as input
+        """
+        return Image.new('RGB', original_image.size, (0, 0, 0))
+
+    def get_image_embedding(self, image):
+        """
+        Get CLIP embedding for an image
+        """
+        image_input = self.preprocess(image).unsqueeze(0).to(self.device)
+        with torch.no_grad():
+            image_features = self.model.encode_image(image_input)
+            image_features /= image_features.norm(dim=-1, keepdim=True)
+        return image_features
+
+    def get_text_embeddings(self):
+        """
+        Get CLIP embeddings for all forbidden names
+        """
+        text = [f"a photo of a {name}" for name in self.forbidden_names]
+        text_tokens = self.tokenizer(text).to(self.device)
+        
+        with torch.no_grad():
+            text_features = self.model.encode_text(text_tokens)
+            text_features /= text_features.norm(dim=-1, keepdim=True)
+        return text_features
+
+    def check_similarity(self, image_features, text_features):
+        """
+        Calculate maximum cosine similarity between image and all forbidden texts
+        """
+        similarity = (100.0 * image_features @ text_features.T).softmax(dim=-1)
+        max_similarity = similarity.max().item()
+        return max_similarity
 
     def apply(self, image):
         """
-        Detects forbidden content and applies censorship if necessary.
+        Check if image contains forbidden content and return black image if similarity > threshold
         """
-        if self.detect_forbidden_content(image):
-            print("ContentDetectorFilter: Forbidden content detected; applying censor.")
-            image = self.censor_image(image)
+        # Get embeddings
+        image_features = self.get_image_embedding(image)
+        text_features = self.get_text_embeddings()
+        
+        # Calculate similarity
+        max_similarity = self.check_similarity(image_features, text_features)
+        
+        if max_similarity > self.similarity_threshold:
+            print(f"ContentDetectorFilter: Pokemon detected (similarity: {max_similarity:.3f})")
+            return self.create_black_image(image)
+            
         return image
-
-    def load_model(self):
-        """
-        Loads a pre-trained ResNet18 model.
-        """
-        model = models.resnet18(pretrained=True)
-        model.eval()
-        return model
-
-    def get_transform(self):
-        """
-        Defines the image transformations for the model.
-        """
-        preprocess = transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
-            transforms.ToTensor(),
-            transforms.Normalize(
-                mean=[0.485, 0.456, 0.406],
-                std= [0.229, 0.224, 0.225]
-            )
-        ])
-        return preprocess
-
-    def load_forbidden_labels(self):
-        """
-        Loads forbidden labels that might correspond to Pokémon.
-        """
-        # For example purposes, we include 'jellyfish' and 'axolotl' as forbidden labels
-        forbidden_labels = ['jellyfish', 'axolotl']
-        return forbidden_labels
-
-    def detect_forbidden_content(self, image):
-        """
-        Uses the model to detect forbidden content in the image.
-        """
-        input_tensor = self.transform(image).unsqueeze(0)
-        with torch.no_grad():
-            output = self.model(input_tensor)
-            probabilities = F.softmax(output[0], dim=0)
-            top5_prob, top5_catid = torch.topk(probabilities, 5)
-        class_idx = self.load_imagenet_class_index()
-        for idx in top5_catid.numpy():
-            label = class_idx[str(idx)][1]
-            if label in self.forbidden_labels:
-                print(f"ContentDetectorFilter: Detected forbidden label '{label}'.")
-                return True
-        return False
-
-    def censor_image(self, image):
-        """
-        Applies a heavy blur to censor the image.
-        """
-        return image.filter(ImageFilter.GaussianBlur(radius=10))
-
-    def load_imagenet_class_index(self):
-        """
-        Loads the ImageNet class index mapping.
-        """
-        import json
-        class_index_file = 'data/imagenet_class_index.json'
-        if not os.path.exists(class_index_file):
-            os.makedirs('data', exist_ok=True)
-            import urllib.request
-            url = 'https://s3.amazonaws.com/deep-learning-models/image-models/imagenet_class_index.json'
-            urllib.request.urlretrieve(url, class_index_file)
-        with open(class_index_file, 'r') as f:
-            class_idx = json.load(f)
-        return class_idx

@@ -4,10 +4,12 @@ Bulbasaur
 Squirtle
 Eevee
 Snorlax
-Mewtwo
-Mew
+Meowth
 Dragonite
 Gengar
 Jigglypuff
 Psyduck
-Meowth
+Mudkip
+Blastoise
+Ninetales
+Arcanine

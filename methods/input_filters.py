@@ -72,9 +72,9 @@ class RegexFilter(InputFilter):
 
     def load_forbidden_words(self):
         try:
-            with open('data/top_100_pokemon.txt', 'r') as f:
+            with open('data/famous_pokemons.txt', 'r') as f:
                 forbidden_words = [line.strip() for line in f if line.strip()]
         except FileNotFoundError:
-            print("Error: 'data/top_100_pokemon.txt' not found.")
+            print("Error: 'data/famous_pokemons.txt' not found.")
             forbidden_words = []
         return forbidden_words
