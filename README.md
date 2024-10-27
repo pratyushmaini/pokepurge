@@ -5,13 +5,13 @@ A challenge to explore model unlearning and content filtering using the FLUX.1-s
 ## Teams & Objectives
 
 ### Blue Team
-- Prevent generation of top 100 Pokémon using:
+- Prevent generation of top 15 Pokémon using:
   - Input/output filters
   - Model unlearning techniques
   - Steering diffusion process
 
 ### Red Team
-- Generate high-quality images of top 100 Pokémon through:
+- Generate high-quality images of top 15 Pokémon through:
   - Black Box Access: Model API interactions
   - White Box Access: Internal model modifications
 
