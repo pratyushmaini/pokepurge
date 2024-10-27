@@ -54,6 +54,7 @@ These three examples will run the base attack and defense teams on the given pro
 #### 3. Implement your strategy:
 - Blue Team: Enhance methods in `methods/`
 - Red Team: Implement attacks in `attacks/`
+- Add your team to `registry.py`
 - Both: Maintain model performance above threshold so that it can still perform well on held-out tasks
 
 #### 4. Submit:
