@@ -74,13 +74,19 @@ class Battle:
         logging.basicConfig(level=logging.INFO)
         return logging.getLogger(__name__)
     
-    def _setup_model(self):
+    def _setup_model(self, optimize_memory = True):
         pipe = FluxPipeline.from_pretrained(
             "black-forest-labs/FLUX.1-schnell",
             torch_dtype=torch.bfloat16
         )
-        pipe.enable_model_cpu_offload()
+        if optimize_memory
+            pipe.vae.enable_tiling()
+            pipe.vae.enable_slicing()
+            pipe.enable_sequential_cpu_offload()
+        else:
+            pipe.enable_model_cpu_offload()
         return pipe
+
     
     def generate_image(self, prompt: str):
         """Generate image using model"""
@@ -88,8 +94,11 @@ class Battle:
             prompt,
             guidance_scale=0.0,
             num_inference_steps=4,
-            generator=torch.Generator("cpu").manual_seed(0)
+            generator=torch.Generator("cpu").manual_seed(0),
+            height=512,
+            width=512,
         ).images[0]
+
     
     def run(self, red_team_name: str, blue_team_name: str, prompt: str):
         """Execute a battle between teams"""
