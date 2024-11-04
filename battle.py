@@ -79,7 +79,7 @@ class Battle:
             "black-forest-labs/FLUX.1-schnell",
             torch_dtype=torch.bfloat16
         )
-        if optimize_memory
+        if optimize_memory:
             pipe.vae.enable_tiling()
             pipe.vae.enable_slicing()
             pipe.enable_sequential_cpu_offload()
