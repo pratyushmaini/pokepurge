@@ -1,5 +1,7 @@
 import torch
-from diffusers import FluxPipeline
+from diffusers import FluxPipeline, StableDiffusionXLPipeline, EulerDiscreteScheduler
+from huggingface_hub import hf_hub_download
+from safetensors.torch import load_file
 from pathlib import Path
 import logging
 from PIL import Image
@@ -25,7 +27,7 @@ class BlueTeam:
         module = import_module(module_path)
         return getattr(module, class_name)()
     
-    def defend(self, prompt: str, model: FluxPipeline, image: Image = None):
+    def defend(self, prompt: str, model, image: Image = None):
         """Apply all defense layers"""
         # Input defense
         if self.input_filter:
@@ -64,9 +66,15 @@ class RedTeam:
 class Battle:
     """Manages battles between Red and Blue teams"""
     
-    def __init__(self):
+    def __init__(self, model_name="flux-schnell", optimize_memory=False):
+        """
+        Initialize Battle with specified model
+        Args:
+            model_name (str): Either "flux-schnell" or "sdxl-lightning"
+        """
         self.logger = self._setup_logging()
-        self.model = self._setup_model()
+        self.model_name = model_name.lower()
+        self.model = self._setup_model(optimize_memory = optimize_memory)
         self.output_dir = Path('outputs')
         self.output_dir.mkdir(exist_ok=True)
     
@@ -74,31 +82,70 @@ class Battle:
         logging.basicConfig(level=logging.INFO)
         return logging.getLogger(__name__)
     
-    def _setup_model(self, optimize_memory = True):
-        pipe = FluxPipeline.from_pretrained(
-            "black-forest-labs/FLUX.1-schnell",
-            torch_dtype=torch.bfloat16
-        )
-        if optimize_memory:
-            pipe.vae.enable_tiling()
-            pipe.vae.enable_slicing()
-            pipe.enable_sequential_cpu_offload()
+    def _setup_model(self, optimize_memory=True):
+        """Setup model based on selected model_name"""
+        if self.model_name == "flux-schnell":
+            pipe = FluxPipeline.from_pretrained(
+                "black-forest-labs/FLUX.1-schnell",
+                torch_dtype=torch.bfloat16
+            )
+            if optimize_memory:
+                pipe.vae.enable_tiling()
+                pipe.vae.enable_slicing()
+                pipe.enable_sequential_cpu_offload()
+            else:
+                pipe.enable_model_cpu_offload()
+                
+        elif self.model_name == "sdxl-lightning":
+            # Constants for SDXL-Lightning
+            base = "stabilityai/stable-diffusion-xl-base-1.0"
+            repo = "ByteDance/SDXL-Lightning"
+            checkpoint = "sdxl_lightning_4step_unet.safetensors"
+            
+            # Initialize pipeline
+            pipe = StableDiffusionXLPipeline.from_pretrained(
+                base,
+                torch_dtype=torch.float16,
+                variant="fp16"
+            ).to("cuda")
+            
+            # Set up scheduler
+            pipe.scheduler = EulerDiscreteScheduler.from_config(
+                pipe.scheduler.config,
+                timestep_spacing="trailing",
+                prediction_type="epsilon"
+            )
+            
+            # Load the model weights
+            pipe.unet.load_state_dict(
+                load_file(
+                    hf_hub_download(repo, checkpoint),
+                    device="cuda"
+                )
+            )
+            
         else:
-            pipe.enable_model_cpu_offload()
+            raise ValueError(f"Unknown model: {self.model_name}. Choose 'flux-schnell' or 'sdxl-lightning'")
+            
         return pipe
-
     
     def generate_image(self, prompt: str):
         """Generate image using model"""
-        return self.model(
-            prompt,
-            guidance_scale=0.0,
-            num_inference_steps=4,
-            generator=torch.Generator("cpu").manual_seed(0),
-            height=512,
-            width=512,
-        ).images[0]
-
+        if self.model_name == "flux-schnell":
+            return self.model(
+                prompt,
+                guidance_scale=0.0,
+                num_inference_steps=4,
+                generator=torch.Generator("cpu").manual_seed(0),
+                height=512,
+                width=512,
+            ).images[0]
+        else:  # sdxl-lightning
+            return self.model(
+                prompt,
+                num_inference_steps=4,
+                guidance_scale=0
+            ).images[0]
     
     def run(self, red_team_name: str, blue_team_name: str, prompt: str):
         """Execute a battle between teams"""
@@ -115,10 +162,11 @@ class Battle:
         
         # Battle sequence
         self.logger.info(f"Battle: {red_team_name} vs {blue_team_name}")
+        self.logger.info(f"Model: {self.model_name}")
         self.logger.info(f"Initial prompt: {prompt}")
         
         # Red team attack
-        attacked_prompt = red_team.run_attack(prompt)  # Changed from attack() to run_attack()
+        attacked_prompt = red_team.run_attack(prompt)
         self.logger.info(f"Red team modified prompt: {attacked_prompt}")
         
         # Blue team input & model defense
@@ -132,7 +180,7 @@ class Battle:
         _, _, final_image = blue_team.defend(defended_prompt, defended_model, image)
         
         # Save results
-        result_path = self.output_dir / f"{red_team_name}_vs_{blue_team_name}.png"
+        result_path = self.output_dir / f"{self.model_name}_{red_team_name}_vs_{blue_team_name}.png"
         final_image.save(result_path)
         
         return final_image

@@ -33,6 +33,14 @@ def parse_args():
     
     parser.add_argument('--prompt', type=str, required=True,
                       help='Initial prompt for image generation')
+
+    parser.add_argument('--model_name', type=str, default="sdxl-lightning",
+                      choices=["flux-schnell", "sdxl-lightning"],
+                      help='Model name for image generation')
+
+    # Battle optimize_memory
+    parser.add_argument('--optimize_memory', action='store_true',
+                      help='Optimize memory usage during battle (experimental)')
     
     return parser.parse_args()
 
@@ -41,7 +49,7 @@ def main():
     args = parse_args()
     
     # Initialize battle
-    battle = Battle()
+    battle = Battle(model_name = args.model_name, optimize_memory=args.optimize_memory)
     
     # Run battle
     result = battle.run(
