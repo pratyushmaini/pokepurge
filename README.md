@@ -61,6 +61,7 @@ These three examples will run the base attack and defense teams on the given pro
 - Fork repository
 - Add your implementation
 - Document approach in README
+- Each team can submit upto 5 entries in the `registry` as Red Team, and 1 entry in `registry` as Blue Team.
 - Submit pull request
 
 ## Resources
