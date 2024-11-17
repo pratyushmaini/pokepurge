@@ -86,3 +86,32 @@ These three examples will run the base attack and defense teams on the given pro
 
 ## License
 MIT License
+
+# Team Emerald Documentation
+
+## Attacks
+
+### pezAttack
+
+This attack substitutes prompts containing a forbidden pokemon's name with a pre-generated prompt optimized with the PEZ method
+specifically designed to generate that pokemon.
+
+We generated images of all forbidden pokemon with the stable diffusion model. For each image, we optimized an 8-token prompt with 
+the PEZ method, which is implemented here: https://github.com/mhk197/hard-prompts-made-easy. We had to modify the original implementation from https://github.com/YuxinWenRick/hard-prompts-made-easy to work with the text encoder system used by our stable
+diffusion model. We also tuned the hyperparameters to generate better prompts. We ran the optimization system for 10000 steps, and 
+took the prompt with the highest similarity score to the generated image. All prompts achieved at least 40% similarity, which is similar to the pez performance documented in this review paper: https://arxiv.org/pdf/2408.06502. 
+
+We found that pez prompts do not always generate images completely faithful to the meaning of the original prompt, but they do not 
+contain the names of the forbidden pokemon so it is unlikely they will be detected by an input filter.
+
+### SimilarTextEmbeddingAttack
+
+This naive attack substitutes forbidden pokemon names with a random number of tokens that have similar *sentence* embeddings 
+as the original names. Since they do not contain forbidden names, it is unlikely they will be detected by an input filter.
+
+We generated these by searching over the vocabulary space of the embedding model, generating text embeddings, and keeping the tokens
+with the highest similarity scores with respect to the forbidden name's embedding. This was a naive way to find prompts that are close in the text embedding space to the original prompt, but to evade input filters. If we had more time, we would build 
+longer token strings iteratively, using a more sophisticated search method.
+
+This is a similar approach to PEZ, but it ranks generated prompts based on text embedding similarity rather than image-text embedding similarity.
+
