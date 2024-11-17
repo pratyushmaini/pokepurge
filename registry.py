@@ -12,7 +12,8 @@ BASELINE_METHODS = {
     # },
     'attacks': {
         'BaseHomographAttack': 'attacks.black_box_attack.HomographAttack',
-        'BasePromptInjection': 'attacks.black_box_attack.PromptInjection'
+        'BasePromptInjection': 'attacks.black_box_attack.PromptInjection',
+        "PezAttack": "attacks.black_box_attack.PezAttack"
     }
 }
 
@@ -35,15 +36,16 @@ BASELINE_TEAMS = {
    'NoAttackTeam': {
        'type': 'red',
        'attack': None
-   }
+   },
+
 }
 
 
 # Students can register their teams here
 STUDENT_TEAMS = {
     # Example:
-    # 'TeamRocket': {
-    #     'type': 'red',
-    #     'attack': 'CustomHomographAttack'
-    # }
+    'PezAttackTeamEmerald': {
+        'type': 'red',
+        'attack': 'PezAttack'
+    }
 }
