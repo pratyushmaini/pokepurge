@@ -97,9 +97,9 @@ This attack substitutes prompts containing a forbidden pokemon's name with a pre
 specifically designed to generate that pokemon.
 
 We generated images of all forbidden pokemon with the stable diffusion model. For each image, we optimized an 8-token prompt with 
-the PEZ method, which is implemented here: https://github.com/mhk197/hard-prompts-made-easy. We had to modify the original implementation from https://github.com/YuxinWenRick/hard-prompts-made-easy to work with the text encoder system used by our stable
+the PEZ method, from paper Hard Prompts Made Easy[https://arxiv.org/abs/2302.03668]. We had to slightly modify the original implementation[https://github.com/YuxinWenRick/hard-prompts-made-easy] to work with the text encoder system used by our stable
 diffusion model. We also tuned the hyperparameters to generate better prompts. We ran the optimization system for 10000 steps, and 
-took the prompt with the highest similarity score to the generated image. All prompts achieved at least 40% similarity, which is similar to the pez performance documented in this review paper: https://arxiv.org/pdf/2408.06502. 
+took the prompt with the highest similarity score to the generated image. All prompts achieved at least 40% similarity, which is similar to the pez performance documented in the paper Prompt Recovery for Image Generation Models[https://arxiv.org/pdf/2408.06502]. 
 
 We found that pez prompts do not always generate images completely faithful to the meaning of the original prompt, but they do not 
 contain the names of the forbidden pokemon so it is unlikely they will be detected by an input filter.
