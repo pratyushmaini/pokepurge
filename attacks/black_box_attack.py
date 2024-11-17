@@ -126,6 +126,9 @@ class PezAttack(BlackBoxAttack):
         return pez_map
     
     def load_forbidden_words(self):
+        """
+        Loads list of forbidden pokemon names
+        """
         try:
             with open('data/famous_pokemons.txt', 'r') as f:
                 forbidden_words = [line.strip() for line in f if line.strip()]
