@@ -163,7 +163,7 @@ class PerplexityFilter(InputFilter):
 
         print(f"PerplexityFilter: Perplexity: {result['perplexity']:.2f}, Sequence Length: {result['sequence_length']}, Confidence: {result['confidence']:.2f}")
         
-        if result['is_adversarial'] and result['confidence'] > 0.8 and result['perplexity'] > 1000:
+        if result['is_adversarial'] and result['confidence'] > 0.85 and result['perplexity'] > 2000:
             print(f"PerplexityFilter: Adversarial prompt detected (confidence: {result['confidence']:.2f})")
             return '[FILTERED]'
         

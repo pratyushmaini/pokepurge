@@ -16,6 +16,11 @@ BASELINE_METHODS = {
     'attacks': {
         'BaseHomographAttack': 'attacks.black_box_attack.HomographAttack',
         'BasePromptInjection': 'attacks.black_box_attack.PromptInjection',
+        'SynonymReplacementAttack': 'attacks.black_box_attack.SynonymReplacementAttack',
+        'PezAttack': 'attacks.black_box_attack.PezAttack',
+        'CubismStyleAttack': 'attacks.black_box_attack.CubismStyleAttack',
+        'TransformerAttack': 'attacks.black_box_attack.TransformerAttack',
+        'SimilarTextEmbeddingAttack': 'attacks.black_box_attack.SimilarTextEmbeddingAttack'
     }
 }
 
@@ -45,10 +50,30 @@ BASELINE_TEAMS = {
 # Students can register their teams here
 STUDENT_TEAMS = {
     # Example:
-    'TeamEmerald': {
+    'EmeraldDefenseTeam': {
         'type': 'blue',
         'input_filter': 'EmeraldPerplexityFilter',
-        'output_filter': 'EmeraldContentDetector',
+        'output_filter': None,
         'model_mods': 'EmeraldConceptEditing'
+    },
+    'EmeraldAttackTeam1': {
+        'type': 'red',
+        'attack': 'SynonymReplacementAttack'
+    },
+    'EmeraldAttackTeam2': {
+        'type': 'red',
+        'attack': 'PezAttack'
+    },
+    'EmeraldAttackTeam3': {
+        'type': 'red',
+        'attack': 'TransformerAttack'
+    },
+    'EmeraldAttackTeam4': {
+        'type': 'red',
+        'attack': 'SimilarTextEmbeddingAttack'
+    }, 
+    'EmeraldAttackTeam5': {
+        'type': 'red',
+        'attack': 'CubismStyleAttack'
     }
 }
