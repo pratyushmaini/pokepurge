@@ -91,6 +91,9 @@ MIT License
 
 ## Defense
 
+### Input Filters
+
+### Model Modification
 Our main defense involves model editing done by adapting the implementation of the paper [Unified Concept Editing in Diffusion Models](https://github.com/rohitgandikota/unified-concept-editing) to our diffusion model. This implementation entails specifying
 concepts to erase and concepts to preserve -- so we tried to edit out the forbidden pokemon while still preserving the model's
 performance on nonforbidden pokemon. The approach entails editing the model's cross attention weights without fine-tuning, using a closed form solution to the simultaneous minimization of the difference between new outputs and old, conditioned on the concepts to 
@@ -99,6 +102,10 @@ preserve and the concepts to forget.
 We uploaded the new model's weights to the `data` folder and huggingface. We also provide some our our implementation of the approach in the `model modifications.py` file.
 
 We found that this approach completely erases the concepts of the forbidden pokemon in all of our testing.
+
+### Output filters
+We chose not to use the base filter, or to use a resnet-based image classification model that we trained, due to the possibilty of 
+False Positives. We found that this occured an uncomfortable amount of times in our testing. Instead, we trust in the performance of our model modification to not produce the forbidden pokemon 
 
 ## Attacks
 
