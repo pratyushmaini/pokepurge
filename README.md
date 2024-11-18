@@ -12,8 +12,22 @@ A challenge to explore model unlearning and content filtering using the FLUX.1-s
 
 ### Red Team
 - Generate high-quality images of top 15 Pokémon through:
-  - Black Box Access: Model API interactions
+  - Black Box Access: We modified model API interactions to adversarially prompt model generation of top 15 pokemons via the following 5 classes of attacks:
+    1. `RandomizedDupAndCombAttack` 
+        - With 50% probability, run the letter duplication attack only. Otherwise, run the syllable combination attack.
+        - The letter duplication attack randomly chooses a letter in each word in the input prompt and duplicates it
+        - The syllable combination attack splits the input prompt into syllables and randomly joins them with either a space or a special character.
+    2. `SynonymReplacementAttack`
+        - If the original prompt contains an exact match for any of the top 15 pokemons, replace the token with a suggestive paraphrase to bypass any potential blue team defenses. The paraphrases are precomputed and stored in a lookup dictionary.
+    3. `PermutationAttack`
+        - For each word in the input prompt, randomly swap two letters if the length is greater than 5.
+        - This exploits the error tolerance of word embeddings used by the diffusion model.
+    4. `PermuteAndJoinAttack`
+        - First apply 3) `PermutationAttack` to the prompt, then use the `SyllableCombinationAttack` on the processed prompt.
+    5. `MisspellJoinInjectAttack`
+        - Apply the `LetterSubstitutionAttack` on the prompt, then add the adversarial prefix and suffix to the input prompt 
   - White Box Access: Internal model modifications
+    - Did not implement due to 1) last-minute model change and 2) time constraints
 
 ## Evaluation
 - Success rate in preventing/generating Pokémon
