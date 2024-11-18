@@ -95,8 +95,8 @@ MIT License
 We use the basic regex filter provided in the implementation.
 
 We also created a perplexity filter to screen for prompts that are most likely adversarial. Optimized prompts like ours 
-use sequences of tokens that often have high perplexity and low fluency. We created a perplexity filter with GPT2 to 
-detect prompts like these and to censor them.
+use sequences of tokens that often have high perplexity and low fluency. We created a perplexity filter using GPT2 to calculate perplexity and lightGBM as a classifier to detect prompts like these and to censor them. We have a high threshold for perplexity
+to decrease the likelihood of false positives.
 
 ### Model Modification
 Our main defense involves model editing done by adapting the implementation of the paper [Unified Concept Editing in Diffusion Models](https://github.com/rohitgandikota/unified-concept-editing) to our diffusion model. This implementation entails specifying
