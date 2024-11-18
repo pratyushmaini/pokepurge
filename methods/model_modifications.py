@@ -27,15 +27,17 @@ class ConceptEditing(ModelModification):
         self.preserve_scale = preserve_scale
         self.technique = technique
 
-    def apply(self, ldm_stable, train_from_scratch=False):
+    def apply(self, ldm_stable, is_battle=True):
         """
         Apply concept editing to the model
         """
-        if train_from_scratch is False:
+        if is_battle is True:
             # TODO add model path (huggingface probably)
-            ldm_stable.unet.load_state_dict(
-                torch.load(f'models/{model_name}', map_location=device)
+            model_path = hf_hub_download(
+                repo_id="gdhanuka/sdxl-lightning-pokepurge",
+                filename="sdxl_edited.pt"
             )
+            ldm_stable.unet.load_state_dict(torch.load(model_path, map_location=device))
             return ldm_stable
         # Get cross-attention layers
         ca_layers = []

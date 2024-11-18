@@ -2,14 +2,17 @@
 BASELINE_METHODS = {
     'input_filters': {
         'BaseRegexFilter': 'methods.input_filters.RegexFilter',
-        'BaseWordFilter': 'methods.input_filters.WordFilter'
+        'BaseWordFilter': 'methods.input_filters.WordFilter',
+        'EmeraldPerplexityFilter': 'methods.input_filters.PerplexityFilter'
     },
     'output_filters': {
-        'BaseContentDetector': 'methods.output_filters.ContentDetectorFilter'
+        'BaseContentDetector': 'methods.output_filters.ContentDetectorFilter',
+        'EmeraldContentDetector': 'methods.output_filters.ContentDetectorFilter2'
     },
-    # 'model_mods': {
-    #     'BaseModelPatch': 'methods.model_modifications.ModelPatch'
-    # },
+    'model_mods': {
+        'BaseModelPatch': 'methods.model_modifications.ModelPatch',
+        'EmeraldConceptEditing': 'methods.model_modifications.ConceptEditing',
+    },
     'attacks': {
         'BaseHomographAttack': 'attacks.black_box_attack.HomographAttack',
         'BasePromptInjection': 'attacks.black_box_attack.PromptInjection',
@@ -42,4 +45,10 @@ BASELINE_TEAMS = {
 # Students can register their teams here
 STUDENT_TEAMS = {
     # Example:
+    'TeamEmerald': {
+        'type': 'blue',
+        'input_filter': 'EmeraldPerplexityFilter',
+        'output_filter': 'EmeraldContentDetector',
+        'model_mods': 'EmeraldConceptEditing'
+    }
 }
