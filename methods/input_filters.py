@@ -2,6 +2,12 @@
 
 from .base_method import BaseMethod
 import re
+import torch
+import joblib
+from lightgbm import LGBMClassifier
+import lightgbm
+from transformers import GPT2LMHeadModel, GPT2TokenizerFast
+import numpy as np
 
 class InputFilter(BaseMethod):
     def __init__(self):
@@ -86,7 +92,7 @@ class PerplexityFilter(InputFilter):
     to classify prompt as adversarial or not based on sequence length and perplexity.
     Also applies the RegexFilter as a second layer of filtering.
     """
-    def __init__(self, model_dir='models/'):
+    def __init__(self, model_dir='data/models'):
         super().__init__()
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
@@ -154,16 +160,18 @@ class PerplexityFilter(InputFilter):
         """
         # First check for adversarial content using perplexity
         result = self.detect_adversarial(prompt)
+
+        print(f"PerplexityFilter: Perplexity: {result['perplexity']:.2f}, Sequence Length: {result['sequence_length']}, Confidence: {result['confidence']:.2f}")
         
-        if result['is_adversarial'] and result['confidence'] > 0.8:
+        if result['is_adversarial'] and result['confidence'] > 0.8 and result['perplexity'] > 1000:
             print(f"PerplexityFilter: Adversarial prompt detected (confidence: {result['confidence']:.2f})")
             return '[FILTERED]'
         
         # If not filtered by perplexity check, apply regex filter
         filtered_prompt = self.regex_filter.apply(prompt)
         
-        # If regex filter modified the prompt, it found forbidden content
-        if filtered_prompt != prompt:
-            return '[FILTERED]'
+        # # If regex filter modified the prompt, it found forbidden content
+        # if filtered_prompt != prompt:
+        #     return '[FILTERED]'
             
-        return prompt
+        return filtered_prompt
