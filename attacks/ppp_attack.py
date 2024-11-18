@@ -25,7 +25,6 @@ pokemon_to_descriptions = {
     'mudkip': 'a small, blue tank-like japanese character with a fin on its head, cannons on its shell, a playful personality, and water gun abilities',
 }
 
-IS_POKEMON_GLOBAL_FLAG = False
 
 # Helper functions
 def tokenize(prompt):
@@ -250,7 +249,6 @@ class SyllableCombinationAttack(BlackBoxAttack):
             if is_pokemon:
                 tokens.append(' ')
                 tokens.append(pokemon_to_descriptions[pokemon_name])
-                IS_POKEMON_GLOBAL_FLAG = True
 
         return ''.join(tokens)
     
@@ -286,11 +284,10 @@ class PermutationAttack(BlackBoxAttack):
         Permutes the letters in a word.
         """
         # randomly swap two letters in the word
-        is_pokemon, pokemon_name = is_instance_pokemon_and_get_name(word)
+        is_pokemon, _ = is_instance_pokemon_and_get_name(word)
         if not is_pokemon or len(word) <= 5:
             return word
 
-        IS_POKEMON_GLOBAL_FLAG = True 
         word = list(word)
         idx1, idx2 = random.sample(range(len(word)), 2)
         c1, c2 = word[idx1], word[idx2]
@@ -352,7 +349,6 @@ class MisspellJoinInjectAttack(BlackBoxAttack):
         """
         res = InjectPrefixAndSuffix().apply(LetterSubstitutionAttack().apply(prompt))
         # resets global flag only for the final call to an attack method
-        IS_POKEMON_GLOBAL_FLAG = False         
         return res
 
 class RandomizedDupAndCombAttack(BlackBoxAttack):
