@@ -92,6 +92,11 @@ MIT License
 ## Defense
 
 ### Input Filters
+We use the basic regex filter provided in the implementation.
+
+We also created a perplexity filter to screen for prompts that are most likely adversarial. Optimized prompts like ours 
+use sequences of tokens that often have high perplexity and low fluency. We created a perplexity filter with GPT2 to 
+detect prompts like these and to censor them.
 
 ### Model Modification
 Our main defense involves model editing done by adapting the implementation of the paper [Unified Concept Editing in Diffusion Models](https://github.com/rohitgandikota/unified-concept-editing) to our diffusion model. This implementation entails specifying
@@ -99,7 +104,7 @@ concepts to erase and concepts to preserve -- so we tried to edit out the forbid
 performance on nonforbidden pokemon. The approach entails editing the model's cross attention weights without fine-tuning, using a closed form solution to the simultaneous minimization of the difference between new outputs and old, conditioned on the concepts to 
 preserve and the concepts to forget. 
 
-We uploaded the new model's weights to the `data` folder and huggingface. We also provide some our our implementation of the approach in the `model modifications.py` file.
+We uploaded the new model's weights to huggingface. We also provide some our our implementation of the approach in the `model modifications.py` file.
 
 We found that this approach completely erases the concepts of the forbidden pokemon in all of our testing.
 
