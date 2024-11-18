@@ -14,6 +14,9 @@ class BlackBoxAttack(BaseAttack):
         return prompt
 
 class SynonymReplacementAttack(BlackBoxAttack):
+    """
+    Replaces a forbidden name with a randomly selected descriptive phrase meant to evoke the name.
+    """
     def __init__(self):
         super().__init__()
         self.synonym_dict = self.load_synonyms()
@@ -48,7 +51,7 @@ class SynonymReplacementAttack(BlackBoxAttack):
             "meowth": ["coin cat", "Team Rocket companion", "playful feline"],
             "dragonite": ["dragon", "orange winged creature", "gentle giant"],
             "gengar": ["ghost", "shadowy trickster", "purple and mischievous"],
-            "jigglypuff": ["balloon", "singing puffball", "pink and round"],
+            "jigglypuff": ["kirby", "singing puffball", "pink and round"],
             "psyduck": ["duck", "headache-prone", "yellow and confused"],
             "mudkip": ["mud fish", "blue aquatic creature", "starter water-type"],
             "blastoise": ["cannon turtle", "armored water creature"],

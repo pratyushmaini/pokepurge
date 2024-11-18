@@ -115,3 +115,7 @@ longer token strings iteratively, using a more sophisticated search method.
 
 This is a similar approach to PEZ, but it ranks generated prompts based on text embedding similarity rather than image-text embedding similarity.
 
+### SynonymReplacementAttack
+
+This attack is built off of the base implmentation and replaces the names of forbidden pokemon with short descriptive phrases meant
+to evoke the character. It is designed to evade input filters.
