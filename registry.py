@@ -16,6 +16,9 @@ BASELINE_METHODS = {
     'attacks': {
         'BaseHomographAttack': 'attacks.black_box_attack.HomographAttack',
         'BasePromptInjection': 'attacks.black_box_attack.PromptInjection',
+        "EmeraldPezAttack": "attacks.black_box_attack.PezAttack",
+        "EmeraldTextSimAttack": "attacks.black_box_attack.SimilarTextEmbeddingAttack",
+        "EmeraldSynonymReplacementAttack": "attacks.black_box_attack.SynonymReplacementAttack"
     }
 }
 
@@ -50,5 +53,17 @@ STUDENT_TEAMS = {
         'input_filter': 'EmeraldPerplexityFilter',
         'output_filter': 'EmeraldContentDetector',
         'model_mods': 'EmeraldConceptEditing'
-    }
+    },
+    'PezAttackTeamEmerald': {
+        'type': 'red',
+        'attack': 'EmeraldPezAttack'
+    },
+    'TextSimilarityAttackTeamEmerald': {
+        'type': 'red',
+        'attack': 'EmeraldTextSimAttack'
+    },
+    'SynonymReplacementAttackTeamEmerald': {
+        'type': 'red',
+        'attack': 'EmeraldSynonymReplacementAttack'
+    },
 }

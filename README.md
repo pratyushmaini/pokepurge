@@ -89,6 +89,17 @@ MIT License
 
 # Team Emerald Documentation
 
+## Defense
+
+Our main defense involves model editing done by adapting the implementation of the paper [Unified Concept Editing in Diffusion Models](https://github.com/rohitgandikota/unified-concept-editing) to our diffusion model. This implementation entails specifying
+concepts to erase and concepts to preserve -- so we tried to edit out the forbidden pokemon while still preserving the model's
+performance on nonforbidden pokemon. The approach entails editing the model's cross attention weights without fine-tuning, using a closed form solution to the simultaneous minimization of the difference between new outputs and old, conditioned on the concepts to 
+preserve and the concepts to forget. 
+
+We uploaded the new model's weights to the `data` folder and huggingface. We also provide some our our implementation of the approach in the `model modifications.py` file.
+
+We found that this approach completely erases the concepts of the forbidden pokemon in all of our testing.
+
 ## Attacks
 
 ### pezAttack
@@ -97,9 +108,9 @@ This attack substitutes prompts containing a forbidden pokemon's name with a pre
 specifically designed to generate that pokemon.
 
 We generated images of all forbidden pokemon with the stable diffusion model. For each image, we optimized an 8-token prompt with 
-the PEZ method, from paper Hard Prompts Made Easy[https://arxiv.org/abs/2302.03668]. We had to slightly modify the original implementation[https://github.com/YuxinWenRick/hard-prompts-made-easy] to work with the text encoder system used by our stable
+the PEZ method, from paper [Hard Prompts Made Easy](https://arxiv.org/abs/2302.03668). We had to slightly modify the original [implementation](https://github.com/YuxinWenRick/hard-prompts-made-easy) to work with the text encoder system used by our stable
 diffusion model. We also tuned the hyperparameters to generate better prompts. We ran the optimization system for 10000 steps, and 
-took the prompt with the highest similarity score to the generated image. All prompts achieved at least 40% similarity, which is similar to the pez performance documented in the paper Prompt Recovery for Image Generation Models[https://arxiv.org/pdf/2408.06502]. 
+took the prompt with the highest similarity score to the generated image. All prompts achieved at least 40% similarity, which is similar to the pez performance documented in the paper [Prompt Recovery for Image Generation Models](https://arxiv.org/pdf/2408.06502). 
 
 We found that pez prompts do not always generate images completely faithful to the meaning of the original prompt, but they do not 
 contain the names of the forbidden pokemon so it is unlikely they will be detected by an input filter.
@@ -115,3 +126,7 @@ longer token strings iteratively, using a more sophisticated search method.
 
 This is a similar approach to PEZ, but it ranks generated prompts based on text embedding similarity rather than image-text embedding similarity.
 
+### SynonymReplacementAttack
+
+This attack is built off of the base implmentation and replaces the names of forbidden pokemon with short descriptive phrases meant
+to evoke the character. It is designed to evade input filters.
