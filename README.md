@@ -115,6 +115,12 @@ took the prompt with the highest similarity score to the generated image. All pr
 We found that pez prompts do not always generate images completely faithful to the meaning of the original prompt, but they do not 
 contain the names of the forbidden pokemon so it is unlikely they will be detected by an input filter.
 
+### MMA-Diffusion Text-Modal Attack
+Given that the diffusion model’s denoising steps are guided by the text embedding, MMA-Diffusion launches an attack by ensuring identical latent from text encoder, guaranteed by their proposed semantic similarity-driven loss. To find such a free-style adversarial prompt, the paper uses a search method based on gradient optimization. Then, sensitive word regularization is applied to ensure that generated prompt does not contain any sensitive words. Thus, MMA-Diffusion maintains high fidelity of the output without any sensitive words.
+The paper can be found here: [MMA-Diffusion: MultiModal Attack on Diffusion Models](https://arxiv.org/pdf/2311.17516#page=3.49) and we used the code available [here](https://github.com/GunjanDhanuka/mma-pokepurge) with modified target prompt and fewer iterations (about 150 per prompt v/s the recommened 500+).
+
+This attack ensures that we can evade an input filter, and now to evade any output filter we had to generate images that looked like a Pokemon to human, but could deceive models like CLIP. Upon manual experimentation, we found that using art styles like Cubism or making hybrid of Transformers+Pokemon was effective at bypassing CLIP-based output filters. Hence we used Claude-3.5 Sonnet to generate target prompts for each pokemon, also adding context like type of pokemon and its body features to compensate for the loss of information by prompt optimization.
+
 ### SimilarTextEmbeddingAttack
 
 This naive attack substitutes forbidden pokemon names with a random number of tokens that have similar *sentence* embeddings 
