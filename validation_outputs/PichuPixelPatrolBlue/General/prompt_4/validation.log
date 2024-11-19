@@ -1,0 +1,26 @@
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:00,  8.04it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00, 21.63it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.73it/s]
+Traceback (most recent call last):
+  File "/home/pratyus2/scratch/projects/pokepurge/main.py", line 69, in <module>
+    main()
+  File "/home/pratyus2/scratch/projects/pokepurge/main.py", line 59, in main
+    result = battle.run(
+             ^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/battle.py", line 164, in run
+    blue_team = BlueTeam(blue_config)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/battle.py", line 16, in __init__
+    self.input_filter = self._load_method('input_filter', 'input_filters')
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/battle.py", line 28, in _load_method
+    return getattr(module, class_name)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/methods/ppp_input_filters.py", line 138, in __init__
+    self.forbidden_embeddings = [self.get_word_embedding(word.lower()) for word in self.forbidden_pokemons]
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/methods/ppp_input_filters.py", line 169, in get_word_embedding
+    model = self.get_model()
+            ^^^^^^^^^^^^^^^^
+  File "/home/pratyus2/scratch/projects/pokepurge/methods/ppp_input_filters.py", line 156, in get_model
+    if self.embedding_model is None:
+       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EmbeddingFilter' object has no attribute 'embedding_model'

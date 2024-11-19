@@ -69,7 +69,7 @@ class RedTeam:
 class Battle:
     """Manages battles between Red and Blue teams"""
     
-    def __init__(self, model_name="flux-schnell", optimize_memory=False):
+    def __init__(self, model_name="flux-schnell", optimize_memory=False, output_dir='outputs'):
         """
         Initialize Battle with specified model
         Args:
@@ -78,7 +78,7 @@ class Battle:
         self.logger = self._setup_logging()
         self.model_name = model_name.lower()
         self.model = self._setup_model(optimize_memory = optimize_memory)
-        self.output_dir = Path('outputs')
+        self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
     
     def _setup_logging(self):

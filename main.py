@@ -42,6 +42,10 @@ def parse_args():
     parser.add_argument('--optimize_memory', action='store_true',
                       help='Optimize memory usage during battle (experimental)')
     
+    # output folder
+    parser.add_argument('--output_dir', type=str, default='outputs',
+                      help='Output folder for battle results')
+
     return parser.parse_args()
 
 def main():
@@ -49,17 +53,17 @@ def main():
     args = parse_args()
     
     # Initialize battle
-    battle = Battle(model_name = args.model_name, optimize_memory=args.optimize_memory)
+    battle = Battle(model_name = args.model_name, optimize_memory=args.optimize_memory, output_dir=args.output_dir)
     
     # Run battle
     result = battle.run(
         red_team_name=args.red,
         blue_team_name=args.blue,
-        prompt=args.prompt
+        prompt=args.prompt,
     )
     
     print(f"\nBattle complete!")
-    print(f"Results saved in outputs/{args.red}_vs_{args.blue}.png")
+    print(f"Results saved in {args.output_dir}/{args.red}_vs_{args.blue}.png")
 
 if __name__ == "__main__":
     main()

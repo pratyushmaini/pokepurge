@@ -1,0 +1,19 @@
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00, 23.16it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00,  8.21it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.52it/s]
+/home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+INFO:battle:Battle: NoAttackTeam vs TeamPikaDefense
+INFO:battle:Model: sdxl-lightning
+INFO:battle:Initial prompt: A snowy mountain peak with clouds drifting by in the early morning light.
+INFO:battle:Red team modified prompt: A snowy mountain peak with clouds drifting by in the early morning light.
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.38it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.03it/s]100%|██████████| 4/4 [00:00<00:00,  6.99it/s]100%|██████████| 4/4 [00:00<00:00,  5.93it/s]
+INFO:battle:Blue team filtered prompt: the image is a landscape photograph of a snowy mountain peak. the mountain is covered in a thick layer of snow and has a jagged, jagged peak with patches of brown and white. the sky is a pale blue with a few wispy clouds scattered across it. the sun is setting, casting a warm glow over the mountain and the surrounding landscape. the overall mood of the image is peaceful and serene.
+Token indices sequence length is longer than the specified maximum sequence length for this model (84 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the image is peaceful and serene.']
+Token indices sequence length is longer than the specified maximum sequence length for this model (84 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the image is peaceful and serene.']
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 13.13it/s]100%|██████████| 4/4 [00:00<00:00, 11.04it/s]100%|██████████| 4/4 [00:00<00:00, 11.31it/s]
+
+Battle complete!
+Results saved in validation_outputs/TeamPikaDefense/General/prompt_2/NoAttackTeam_vs_TeamPikaDefense.png

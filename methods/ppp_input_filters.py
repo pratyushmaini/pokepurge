@@ -20,6 +20,10 @@ class Model:
         
         if self.model is None:
             self.model = AutoModelForCausalLM.from_pretrained("openai-community/gpt2")
+            # send to GPU
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            self.model.to(self.device)
+            print("Model loaded to device:", self.device)
 
     def paraphrase_text(self, prompt):
         # Prepare input text
@@ -133,7 +137,8 @@ class EmbeddingFilter(InputFilter):
         self.patterns = self.generate_patterns()
         self.forbidden_embeddings = [self.get_word_embedding(word.lower()) for word in self.forbidden_pokemons]
         self.pokemon_embeddings = {word: self.get_word_embedding(word.lower()) for word in self.pokemon_names}
-        
+        self.embedding_model = None
+
     def apply(self, prompt):
         filtered_prompt = self.homograph_filter(prompt)
         for pattern in self.patterns:
@@ -147,10 +152,21 @@ class EmbeddingFilter(InputFilter):
         filtered_words = [word if not self.is_embed_close_match(word.lower()) else '[REDACTED]' for word in words]
         return ' '.join(filtered_words)
         
+    def get_model(self):
+        if self.embedding_model is None:
+            self.embedding_model = BertModel.from_pretrained('bert-base-uncased')
+            # send to GPU
+            self.device = "cuda" if torch.cuda.is_available() else "cpu"
+            model = self.embedding_model.to(self.device)
+        else:
+            model = self.embedding_model
+        
+        return model
+
     def get_word_embedding(self, word):
         # Define function to get BERT embeddings for a word
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        model = BertModel.from_pretrained('bert-base-uncased')
+        model = self.get_model()
         inputs = tokenizer(word, return_tensors='pt')
         outputs = model(**inputs)
         return outputs.last_hidden_state.mean(dim=1) 

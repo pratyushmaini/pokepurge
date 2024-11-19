@@ -1,0 +1,19 @@
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00, 11.31it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  8.71it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00,  7.52it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.65it/s]
+/home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+INFO:battle:Battle: NoAttackTeam vs TeamPikaDefense
+INFO:battle:Model: sdxl-lightning
+INFO:battle:Initial prompt: A strong, armored creature standing guard at the edge of a rocky ocean cliff.
+INFO:battle:Red team modified prompt: A strong, armored creature standing guard at the edge of a rocky ocean cliff.
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.35it/s] 75%|███████▌  | 3/4 [00:00<00:00,  5.88it/s]100%|██████████| 4/4 [00:00<00:00,  5.90it/s]
+INFO:battle:Blue team filtered prompt: the image is a digital illustration of a mythical creature standing on a rocky cliff overlooking the ocean. the creature appears to be a dragon-like creature with sharp teeth and sharp claws. it is wearing a suit of armor and has a fierce expression on its face. the background shows a rocky coastline with a large rock formation on the left side and a small boat on the water on the right side. the sky is cloudy and the overall mood of the image is ominous and ominous.
+Token indices sequence length is longer than the specified maximum sequence length for this model (97 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the right side. the sky is cloudy and the overall mood of the image is ominous and ominous.']
+Token indices sequence length is longer than the specified maximum sequence length for this model (97 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the right side. the sky is cloudy and the overall mood of the image is ominous and ominous.']
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 12.82it/s]100%|██████████| 4/4 [00:00<00:00, 11.19it/s]100%|██████████| 4/4 [00:00<00:00, 11.39it/s]
+
+Battle complete!
+Results saved in validation_outputs/TeamPikaDefense/Blastoise/prompt_1/NoAttackTeam_vs_TeamPikaDefense.png

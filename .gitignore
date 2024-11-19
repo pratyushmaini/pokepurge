@@ -9,3 +9,4 @@ __pycache__/
 *.py[cod]
 cache/
 outputs/
+validation_outputs/
