@@ -132,12 +132,12 @@ class RegexFilter(InputFilter):
 class EmbeddingFilter(InputFilter):
     def __init__(self):
         super().__init__()
+        self.embedding_model = None
         self.forbidden_pokemons = self.load_forbidden_words()
         self.pokemon_names = self.load_pokemon_names()
         self.patterns = self.generate_patterns()
         self.forbidden_embeddings = [self.get_word_embedding(word.lower()) for word in self.forbidden_pokemons]
         self.pokemon_embeddings = {word: self.get_word_embedding(word.lower()) for word in self.pokemon_names}
-        self.embedding_model = None
 
     def apply(self, prompt):
         filtered_prompt = self.homograph_filter(prompt)
