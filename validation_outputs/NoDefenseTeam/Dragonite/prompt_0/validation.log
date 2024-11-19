@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:01,  4.10it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  7.46it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.67it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.38it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:02,  2.71it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00,  5.98it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  6.36it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 11.22it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  8.43it/s]
 INFO:battle:Battle: NoAttackTeam vs NoDefenseTeam
 INFO:battle:Model: sdxl-lightning
 INFO:battle:Initial prompt: A majestic dragon flying gracefully above the clouds at sunset.

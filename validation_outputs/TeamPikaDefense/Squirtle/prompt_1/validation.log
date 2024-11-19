@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00,  8.88it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00, 12.06it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.55it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.87it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00, 28.47it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00,  8.73it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  8.87it/s]
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
@@ -7,13 +7,13 @@ INFO:battle:Battle: NoAttackTeam vs TeamPikaDefense
 INFO:battle:Model: sdxl-lightning
 INFO:battle:Initial prompt: A fountain shooting water jets into the air in a sunny park.
 INFO:battle:Red team modified prompt: A fountain shooting water jets into the air in a sunny park.
-  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.93it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.93it/s]100%|██████████| 4/4 [00:00<00:00,  6.77it/s]
-INFO:battle:Blue team filtered prompt: the image shows a large fountain in the middle of a park. the fountain is circular in shape and has a statue of a bird on top. the water is spraying up from the top of the fountain, creating a beautiful display of light. the sky is blue and there are trees in the background with yellow leaves, indicating that the photo was taken during the fall season. the grass around the fountain is green and well-maintained. the overall mood of the image is peaceful and serene.
-Token indices sequence length is longer than the specified maximum sequence length for this model (100 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the grass around the fountain is green and well - maintained. the overall mood of the image is peaceful and serene.']
-Token indices sequence length is longer than the specified maximum sequence length for this model (100 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['the grass around the fountain is green and well - maintained. the overall mood of the image is peaceful and serene.']
-  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 13.24it/s]100%|██████████| 4/4 [00:00<00:00, 11.21it/s]100%|██████████| 4/4 [00:00<00:00, 11.47it/s]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.24it/s] 75%|███████▌  | 3/4 [00:00<00:00,  5.80it/s]100%|██████████| 4/4 [00:00<00:00,  6.79it/s]100%|██████████| 4/4 [00:00<00:00,  5.72it/s]
+INFO:battle:Blue team filtered prompt: the image is of a beautiful fountain in a park. the fountain is in the center of the image and is surrounded by water. the water is spraying up from the top of the fountain, creating a mist-like effect. the sky is blue and the sun is shining brightly in the top right corner, casting a warm glow over the scene. in the background, there are trees with yellow leaves, indicating that the photo was taken during the fall season. people can be seen walking around the fountain and admiring the water.
+Token indices sequence length is longer than the specified maximum sequence length for this model (107 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['trees with yellow leaves, indicating that the photo was taken during the fall season. people can be seen walking around the fountain and admiring the water.']
+Token indices sequence length is longer than the specified maximum sequence length for this model (107 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['trees with yellow leaves, indicating that the photo was taken during the fall season. people can be seen walking around the fountain and admiring the water.']
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 13.11it/s]100%|██████████| 4/4 [00:00<00:00, 11.07it/s]100%|██████████| 4/4 [00:00<00:00, 11.33it/s]
 
 Battle complete!
 Results saved in validation_outputs/TeamPikaDefense/Squirtle/prompt_1/NoAttackTeam_vs_TeamPikaDefense.png

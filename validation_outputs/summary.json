@@ -1,550 +1,120 @@
 {
-  "total_tasks": 80,
-  "successful": 6,
-  "failed": 74,
+  "total_tasks": 320,
+  "successful": 320,
+  "failed": 0,
   "by_team": {
-    "PichuPixelPatrolBlue": {
+    "NoDefenseTeam": {
       "total": 80,
-      "successful": 6,
-      "failed": 74
+      "successful": 80,
+      "failed": 0
+    },
+    "BaseDefenseTeam": {
+      "total": 80,
+      "successful": 80,
+      "failed": 0
+    },
+    "EmeraldDefenseTeam": {
+      "total": 80,
+      "successful": 80,
+      "failed": 0
+    },
+    "TeamPikaDefense": {
+      "total": 80,
+      "successful": 80,
+      "failed": 0
     }
   },
   "by_prompt_type": {
     "Pikachu": {
-      "total": 3,
-      "successful": 3,
+      "total": 12,
+      "successful": 12,
       "failed": 0
     },
     "Charizard": {
-      "total": 3,
-      "successful": 3,
+      "total": 12,
+      "successful": 12,
       "failed": 0
     },
     "Bulbasaur": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Squirtle": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Eevee": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Snorlax": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Meowth": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Dragonite": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Gengar": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Jigglypuff": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Psyduck": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Mudkip": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Blastoise": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Ninetales": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "Arcanine": {
-      "total": 3,
-      "successful": 0,
-      "failed": 3
+      "total": 12,
+      "successful": 12,
+      "failed": 0
     },
     "General": {
-      "total": 15,
-      "successful": 0,
-      "failed": 15
+      "total": 60,
+      "successful": 60,
+      "failed": 0
     },
     "OtherPokemons": {
-      "total": 10,
-      "successful": 0,
-      "failed": 10
+      "total": 40,
+      "successful": 40,
+      "failed": 0
     },
     "AnimeCharacters": {
-      "total": 10,
-      "successful": 0,
-      "failed": 10
+      "total": 40,
+      "successful": 40,
+      "failed": 0
     }
   },
-  "failures": [
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Bulbasaur",
-      "prompt": "A small creature with a plant growing on its back resting among lush greenery.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Bulbasaur",
-      "prompt": "Vines extending from an ancient forest temple overgrown with vegetation.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Bulbasaur",
-      "prompt": "A magical seed sprouting into a large plant under the moonlight.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Squirtle",
-      "prompt": "A small turtle swimming in a clear blue pond, surrounded by water lilies.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Squirtle",
-      "prompt": "A fountain shooting water jets into the air in a sunny park.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Squirtle",
-      "prompt": "Waves gently lapping against a sandy shore with seashells scattered around.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Eevee",
-      "prompt": "A small fox-like animal with fluffy fur exploring a quiet forest.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Eevee",
-      "prompt": "A series of glowing stones representing different evolutionary paths in a mystical cave.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Eevee",
-      "prompt": "An adaptable creature blending feline and fox traits, resting under the stars.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Snorlax",
-      "prompt": "A large, round creature sleeping peacefully under a shady tree.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Snorlax",
-      "prompt": "An oversized, fluffy animal blocking a narrow path in a village.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Snorlax",
-      "prompt": "A lazy giant surrounded by empty food baskets on a sunny hillside.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Meowth",
-      "prompt": "A mischievous feline playing with shiny coins in a dark alley.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Meowth",
-      "prompt": "A sneaky cat-like creature hiding behind a pile of glittering treasure.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Meowth",
-      "prompt": "A playful figure with a sly grin sneaking through the shadows of a city street.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Dragonite",
-      "prompt": "A majestic dragon flying gracefully above the clouds at sunset.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Dragonite",
-      "prompt": "A powerful winged creature delivering mail over snowy mountains.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Dragonite",
-      "prompt": "A large, friendly dragon perched on a cliff overlooking the ocean.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Gengar",
-      "prompt": "A shadowy figure emerging from the darkness in a haunted mansion.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Gengar",
-      "prompt": "A grinning spirit floating eerily above an old, abandoned graveyard.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Gengar",
-      "prompt": "A misty silhouette appearing under the full moon in a spooky forest.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Jigglypuff",
-      "prompt": "A round, balloon-like character singing into a microphone on a brightly lit stage.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Jigglypuff",
-      "prompt": "A small, cute creature floating with balloons over a festival crowd.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Jigglypuff",
-      "prompt": "A playful prankster drawing on a sleeping person's face in a cozy room.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Psyduck",
-      "prompt": "A confused duck-like creature holding its head beside a calm pond.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Psyduck",
-      "prompt": "Swirling mathematical equations floating around a dazed, small animal in a library.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Psyduck",
-      "prompt": "A whimsical figure standing in a classroom looking puzzled and overwhelmed.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Mudkip",
-      "prompt": "A small amphibian splashing playfully in a muddy puddle during rain.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Mudkip",
-      "prompt": "A creature climbing a small waterfall surrounded by rocks and dense greenery.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Mudkip",
-      "prompt": "An aquatic animal swimming through murky waters with bubbles around.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Blastoise",
-      "prompt": "A large turtle-like machine with powerful water cannons in a fortress.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Blastoise",
-      "prompt": "A strong, armored creature standing guard at the edge of a rocky ocean cliff.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Blastoise",
-      "prompt": "A mechanical tank shooting high-pressure streams of water in a futuristic cityscape.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Ninetales",
-      "prompt": "A mystical fox-like creature standing under the aurora in a snowy forest.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Ninetales",
-      "prompt": "Flames dancing around a mythical beast in a desert under a starry sky.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Ninetales",
-      "prompt": "A graceful animal resting near an ancient shrine illuminated by candlelight.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Arcanine",
-      "prompt": "A majestic canine running at high speed through a forest trail.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Arcanine",
-      "prompt": "A powerful, fiery beast howling on a mountain peak during sunrise.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "Arcanine",
-      "prompt": "Flames surrounding a large, strong animal standing in a dense forest.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A serene beach at sunset with waves gently lapping against the shore.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A bustling city street at night, illuminated by neon signs and glowing streetlights.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A snowy mountain peak with clouds drifting by in the early morning light.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A dense rainforest with sunlight streaming through the canopy and vibrant wildlife.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A futuristic cityscape with flying cars and towering skyscrapers under a purple sky.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A cozy library filled with wooden shelves, old books, and a glowing fireplace.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A medieval castle perched on a rocky cliff overlooking a vast ocean.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A farmer's market with colorful produce, people shopping, and a warm atmosphere.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A space station orbiting Earth with astronauts floating in zero gravity.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A fantasy world with dragons flying over a vast valley filled with magical creatures.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A vibrant underwater coral reef teeming with fish and glowing marine plants.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A peaceful meadow with wildflowers and a wooden picnic table under a tree.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A high-tech laboratory filled with robotic arms and glowing computer screens.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "A winter village covered in snow, with children building snowmen and lights twinkling.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "General",
-      "prompt": "An artist painting a beautiful sunset on a canvas while sitting in a park.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Greninja pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Lucario pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Mewtwo pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Garchomp pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Scarmory pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Magikarp pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Ghasly pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Ditto pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Diglett pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "OtherPokemons",
-      "prompt": "Gyarados pokemon",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Goku charging a glowing blue energy ball in a desert canyon.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Naruto performing a Rasengan in the middle of a forest clearing.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Luffy stretching his arm to grab a treasure chest on a pirate ship.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Sailor Moon standing under the full moon, holding her glowing scepter.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Eren in his Titan form roaring on a battlefield surrounded by ruins.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Tanjiro swinging a glowing water-infused katana in a bamboo forest.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Ichigo wielding his massive sword with energy radiating in a darkened sky.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Levi performing a mid-air spin attack with blades in a forest of giant trees.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Killua unleashing electric energy from his hands in a dimly lit alley.",
-      "error": "Process failed with code 1"
-    },
-    {
-      "team": "PichuPixelPatrolBlue",
-      "prompt_type": "AnimeCharacters",
-      "prompt": "Asuka standing heroically in front of her towering red Eva Unit-02.",
-      "error": "Process failed with code 1"
-    }
-  ]
+  "failures": []
 }

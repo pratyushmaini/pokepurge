@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:01,  5.32it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00,  5.83it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00, 11.05it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.33it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:00,  8.10it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00,  5.35it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00,  5.59it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 13.52it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.61it/s]
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
@@ -7,13 +7,13 @@ INFO:battle:Battle: NoAttackTeam vs TeamPikaDefense
 INFO:battle:Model: sdxl-lightning
 INFO:battle:Initial prompt: A powerful, fiery beast howling on a mountain peak during sunrise.
 INFO:battle:Red team modified prompt: A powerful, fiery beast howling on a mountain peak during sunrise.
-  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.01it/s] 75%|███████▌  | 3/4 [00:00<00:00,  4.43it/s]100%|██████████| 4/4 [00:00<00:00,  4.67it/s]
-INFO:battle:Blue team filtered prompt: the image is a digital illustration of a lion standing on top of a mountain peak. the lion is facing towards the right side of the image and its mouth is open wide, as if it is roaring or roaring. the background shows a beautiful sunset with orange and pink hues, and the mountains in the distance are silhouetted against the sky. the sky is filled with clouds, and there is a hint of smoke in the air. the overall mood of the illustration is dramatic and powerful.
-Token indices sequence length is longer than the specified maximum sequence length for this model (100 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', and there is a hint of smoke in the air. the overall mood of the illustration is dramatic and powerful.']
-Token indices sequence length is longer than the specified maximum sequence length for this model (100 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: [', and there is a hint of smoke in the air. the overall mood of the illustration is dramatic and powerful.']
-  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 13.11it/s]100%|██████████| 4/4 [00:00<00:00, 11.15it/s]100%|██████████| 4/4 [00:00<00:00, 11.40it/s]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.82it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.74it/s]100%|██████████| 4/4 [00:00<00:00,  6.61it/s]
+INFO:battle:Blue team filtered prompt: the image is a photograph of a lion standing on a snowy mountain peak. the lion is facing towards the right side of the image and its head is tilted upwards, as if it is looking up towards the sky. the sky is a beautiful orange and pink color, with the sun setting in the background. the mountains in the distance are covered in snow, and the overall mood of the photograph is peaceful and serene.
+Token indices sequence length is longer than the specified maximum sequence length for this model (86 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['mood of the photograph is peaceful and serene.']
+Token indices sequence length is longer than the specified maximum sequence length for this model (86 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['mood of the photograph is peaceful and serene.']
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:00,  9.61it/s] 50%|█████     | 2/4 [00:00<00:00,  9.76it/s] 75%|███████▌  | 3/4 [00:00<00:00,  9.06it/s]100%|██████████| 4/4 [00:00<00:00,  9.88it/s]
 
 Battle complete!
 Results saved in validation_outputs/TeamPikaDefense/Arcanine/prompt_1/NoAttackTeam_vs_TeamPikaDefense.png

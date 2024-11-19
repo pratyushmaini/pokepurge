@@ -47,6 +47,10 @@ class Model:
         # Generate attention mask - just attend to everything
         attention_mask = torch.ones(input_ids.shape, dtype=torch.long) 
 
+        # send to GPU
+        input_ids = input_ids.to(self.device)
+        attention_mask = attention_mask.to(self.device)
+
         # Generate text 
         output = self.model.generate(input_ids, attention_mask=attention_mask, max_length=200, num_return_sequences=1, pad_token_id=self.tokenizer.eos_token_id) 
         # Decode the generated text
@@ -168,6 +172,8 @@ class EmbeddingFilter(InputFilter):
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         model = self.get_model()
         inputs = tokenizer(word, return_tensors='pt')
+        # send to GPU
+        inputs = {key: val.to(self.device) for key, val in inputs.items()}
         outputs = model(**inputs)
         return outputs.last_hidden_state.mean(dim=1) 
 

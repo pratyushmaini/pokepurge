@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00, 10.30it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  9.67it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00,  8.97it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.23it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:01,  3.88it/s]Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  5.31it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:01<00:00,  5.84it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:01<00:00,  6.14it/s]
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
   warnings.warn(
 INFO:battle:Battle: NoAttackTeam vs EmeraldDefenseTeam
@@ -7,7 +7,7 @@ INFO:battle:Initial prompt: A large turtle-like machine with powerful water cann
 INFO:battle:Red team modified prompt: A large turtle-like machine with powerful water cannons in a fortress.
 INFO:battle:Blue team filtered prompt: A large turtle-like machine with powerful water cannons in a fortress.
 PerplexityFilter: Perplexity: 235.83, Sequence Length: 14.0, Confidence: 0.66
-  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:00,  3.21it/s] 75%|███████▌  | 3/4 [00:00<00:00,  7.28it/s]100%|██████████| 4/4 [00:00<00:00,  8.03it/s]100%|██████████| 4/4 [00:00<00:00,  7.08it/s]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:00,  3.10it/s] 75%|███████▌  | 3/4 [00:00<00:00,  7.12it/s]100%|██████████| 4/4 [00:00<00:00,  7.91it/s]100%|██████████| 4/4 [00:00<00:00,  6.94it/s]
 PerplexityFilter: Perplexity: 235.83, Sequence Length: 14.0, Confidence: 0.66
 
 Battle complete!

@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:01,  5.66it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00,  7.12it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00,  8.78it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 10.78it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00,  5.65it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00, 11.69it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.05it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  8.97it/s]
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
@@ -7,13 +7,13 @@ INFO:battle:Battle: NoAttackTeam vs TeamPikaDefense
 INFO:battle:Model: sdxl-lightning
 INFO:battle:Initial prompt: A mystical fox-like creature standing under the aurora in a snowy forest.
 INFO:battle:Red team modified prompt: A mystical fox-like creature standing under the aurora in a snowy forest.
-  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  3.00it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.99it/s]100%|██████████| 4/4 [00:00<00:00,  7.77it/s]100%|██████████| 4/4 [00:00<00:00,  6.80it/s]
-INFO:battle:Blue team filtered prompt: the image is a digital illustration of a red fox standing in a snowy forest. the fox is facing towards the right side of the image, with its head turned slightly to the left. it has a white fur coat and a bushy tail. the background is filled with tall pine trees covered in snow, and the sky is a beautiful purple and green aurora borealis. the colors of the aurora are vibrant and the overall mood of the illustration is peaceful and serene.
-Token indices sequence length is longer than the specified maximum sequence length for this model (95 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['colors of the aurora are vibrant and the overall mood of the illustration is peaceful and serene.']
-Token indices sequence length is longer than the specified maximum sequence length for this model (95 > 77). Running this sequence through the model will result in indexing errors
-The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['colors of the aurora are vibrant and the overall mood of the illustration is peaceful and serene.']
-  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 12.99it/s]100%|██████████| 4/4 [00:00<00:00, 11.00it/s]100%|██████████| 4/4 [00:00<00:00, 11.25it/s]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:00,  3.04it/s] 75%|███████▌  | 3/4 [00:00<00:00,  7.01it/s]100%|██████████| 4/4 [00:00<00:00,  7.80it/s]100%|██████████| 4/4 [00:00<00:00,  6.84it/s]
+INFO:battle:Blue team filtered prompt: the image is a digital illustration of a red fox standing in a snowy forest. the fox is facing towards the right side of the image, with its head turned slightly to the left. it has a blue collar around its neck and its fur is a reddish-brown color. the background is filled with tall pine trees covered in snow, and the sky is a deep green color with a hint of blue. the overall mood of the illustration is peaceful and serene.
+Token indices sequence length is longer than the specified maximum sequence length for this model (94 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['with a hint of blue. the overall mood of the illustration is peaceful and serene.']
+Token indices sequence length is longer than the specified maximum sequence length for this model (94 > 77). Running this sequence through the model will result in indexing errors
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ['with a hint of blue. the overall mood of the illustration is peaceful and serene.']
+  0%|          | 0/4 [00:00<?, ?it/s] 50%|█████     | 2/4 [00:00<00:00, 13.02it/s]100%|██████████| 4/4 [00:00<00:00, 10.98it/s]100%|██████████| 4/4 [00:00<00:00, 11.24it/s]
 
 Battle complete!
 Results saved in validation_outputs/TeamPikaDefense/Ninetales/prompt_0/NoAttackTeam_vs_TeamPikaDefense.png

@@ -1,4 +1,4 @@
-Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  29%|██▊       | 2/7 [00:00<00:00,  6.32it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00,  5.07it/s]Loading pipeline components...:  71%|███████▏  | 5/7 [00:00<00:00,  7.99it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.12it/s]
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]Loading pipeline components...:  43%|████▎     | 3/7 [00:00<00:00, 18.45it/s]Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00, 13.10it/s]Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00,  9.94it/s]
 /home/pratyus2/miniconda3/envs/pokepurge/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
   warnings.warn(
 INFO:battle:Battle: NoAttackTeam vs EmeraldDefenseTeam
@@ -7,7 +7,7 @@ INFO:battle:Initial prompt: Eren in his Titan form roaring on a battlefield surr
 INFO:battle:Red team modified prompt: Eren in his Titan form roaring on a battlefield surrounded by ruins.
 INFO:battle:Blue team filtered prompt: Eren in his Titan form roaring on a battlefield surrounded by ruins.
 PerplexityFilter: Perplexity: 242.00, Sequence Length: 14.0, Confidence: 0.66
-  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:01,  2.90it/s] 75%|███████▌  | 3/4 [00:00<00:00,  6.85it/s]100%|██████████| 4/4 [00:00<00:00,  7.67it/s]100%|██████████| 4/4 [00:00<00:00,  6.68it/s]
+  0%|          | 0/4 [00:00<?, ?it/s] 25%|██▌       | 1/4 [00:00<00:00,  3.10it/s] 75%|███████▌  | 3/4 [00:00<00:00,  7.13it/s]100%|██████████| 4/4 [00:00<00:00,  7.92it/s]100%|██████████| 4/4 [00:00<00:00,  6.95it/s]
 PerplexityFilter: Perplexity: 242.00, Sequence Length: 14.0, Confidence: 0.66
 
 Battle complete!
