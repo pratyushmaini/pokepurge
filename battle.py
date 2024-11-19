@@ -27,11 +27,14 @@ class BlueTeam:
         module = import_module(module_path)
         return getattr(module, class_name)()
     
-    def defend(self, prompt: str, model, image: Image = None):
+    def defend(self, prompt: str, model, image: Image = None, **kwargs):
         """Apply all defense layers"""
         # Input defense
         if self.input_filter:
-            prompt = self.input_filter.apply(prompt)
+            if "generate_image_in_input_filter" in self.config and "generate_image_fn" in kwargs:
+                prompt = self.input_filter.apply(prompt, kwargs.get("generate_image_fn"))
+            else:
+                prompt = self.input_filter.apply(prompt)
             
         # Output defense
         if image and self.output_filter:
@@ -170,7 +173,7 @@ class Battle:
         self.logger.info(f"Red team modified prompt: {attacked_prompt}")
         
         # Blue team input & model defense
-        defended_prompt, defended_model, _ = blue_team.defend(attacked_prompt, self.model)
+        defended_prompt, defended_model, _ = blue_team.defend(attacked_prompt, self.model, generate_image_fn=self.generate_image)
         self.logger.info(f"Blue team filtered prompt: {defended_prompt}")
         
         # Generate image
