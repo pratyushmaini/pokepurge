@@ -9,3 +9,5 @@ matplotlib
 open-clip-torch
 opacus
 nltk
+einops
+unidecode

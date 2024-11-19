@@ -5,21 +5,35 @@ BASELINE_METHODS = {
         'BaseRegexFilter': 'methods.input_filters.RegexFilter',
         'BaseWordFilter': 'methods.input_filters.SimpleWordFilter',
         'EmbeddingFilter': 'methods.ppp_input_filters.EmbeddingFilter'
+        'CaptionFilter': 'methods.input_filters.CaptionFilter',
     },
     'output_filters': {
         'NoOutputFilter': 'methods.output_filters.OutputFilter',
         'BaseContentDetector': 'methods.output_filters.ContentDetectorFilter',
         'ContentClassificationFilter': 'methods.ppp_output_filters.ContentClassificationFilter'
     },
-    # 'model_mods': {
-    #     'BaseModelPatch': 'methods.model_modifications.ModelPatch'
-    # },
+    'model_mods': {
+        'BaseModelPatch': 'methods.model_modifications.ModelPatch',
+        'EmeraldConceptEditing': 'methods.model_modifications.ConceptEditing',
+    },
     'attacks': {
         'RandomizedDupAndCombAttack': 'attacks.ppp_attack.RandomizedDupAndCombAttack',
         'SynonymReplacementAttack': 'attacks.ppp_attack.SynonymReplacementAttack',
         'PermutationAttack': 'attacks.ppp_attack.PermutationAttack',
         'PermuteAndJoinAttack': 'attacks.ppp_attack.PermuteAndJoinAttack',
         'MisspellJoinInjectAttack': 'attacks.ppp_attack.MisspellJoinInjectAttack',
+        'BaseHomographAttack': 'attacks.black_box_attack.HomographAttack',
+        'BasePromptInjection': 'attacks.black_box_attack.PromptInjection',
+        'SynonymReplacementAttack': 'attacks.black_box_attack.SynonymReplacementAttack',
+        'PezAttack': 'attacks.black_box_attack.PezAttack',
+        'CubismStyleAttack': 'attacks.black_box_attack.CubismStyleAttack',
+        'TransformerAttack': 'attacks.black_box_attack.TransformerAttack',
+        'SimilarTextEmbeddingAttack': 'attacks.black_box_attack.SimilarTextEmbeddingAttack'
+        'TeamPikaAttack1': 'attacks.black_box_attack.TeamPikaAttack1',
+        'TeamPikaAttack2': 'attacks.black_box_attack.TeamPikaAttack2',
+        'TeamPikaAttack3': 'attacks.black_box_attack.TeamPikaAttack3',
+        'TeamPikaAttack4': 'attacks.black_box_attack.TeamPikaAttack4',
+        'TeamPikaAttack5': 'attacks.black_box_attack.TeamPikaAttack5',
     }
 }
 
@@ -54,6 +68,32 @@ BASELINE_TEAMS = {
 # Students can register their teams here
 STUDENT_TEAMS = {
     # Example:
+    'EmeraldDefenseTeam': {
+        'type': 'blue',
+        'input_filter': 'EmeraldPerplexityFilter',
+        'output_filter': None,
+        'model_mods': 'EmeraldConceptEditing'
+    },
+    'EmeraldAttackTeam1': {
+        'type': 'red',
+        'attack': 'SynonymReplacementAttack'
+    },
+    'EmeraldAttackTeam2': {
+        'type': 'red',
+        'attack': 'PezAttack'
+    },
+    'EmeraldAttackTeam3': {
+        'type': 'red',
+        'attack': 'TransformerAttack'
+    },
+    'EmeraldAttackTeam4': {
+        'type': 'red',
+        'attack': 'SimilarTextEmbeddingAttack'
+    }, 
+    'EmeraldAttackTeam5': {
+        'type': 'red',
+        'attack': 'CubismStyleAttack'
+    },
     # 'TeamRocket': {
     #     'type': 'red',
     #     'attack': 'CustomHomographAttack'
@@ -88,4 +128,30 @@ STUDENT_TEAMS = {
        'type': 'red',
        'attack': 'PermuteAndJoinAttack'
    },
-} 
+    'TeamPikaDefense': {
+        'type': 'blue',
+        'input_filter': 'CaptionFilter',
+        'output_filter': None,
+        'generate_image_in_input_filter': True
+    },
+    'TeamPikaAttack1': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack1'
+    },
+    'TeamPikaAttack2': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack2'
+    },
+    'TeamPikaAttack3': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack3'
+    },
+    'TeamPikaAttack4': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack4'
+    },
+    'TeamPikaAttack5': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack5'
+    },
+}
