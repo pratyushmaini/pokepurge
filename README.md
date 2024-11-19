@@ -2,18 +2,37 @@
 
 A challenge to explore model unlearning and content filtering using the FLUX.1-schnell diffusion model. Teams compete to either prevent or generate Pokémon character images while maintaining model performance.
 
+# Team PichuPixelPatrol!
+Contributors: Claire Chen, Zijun Ding
+
 ## Teams & Objectives
 
 ### Blue Team
 - Prevent generation of top 15 Pokémon using:
-  - Input/output filters
-  - Model unlearning techniques
-  - Steering diffusion process
+  - Input filters
+    - Step 1: Use various regex-based method to filter out pokemon words.
+    - Step 2: Use BERT pretrained model to embed the each word and compare it to embeddings of Pokemon names. Filter out word whose embedding has a high cosine similarity with Pokemon names.
+  - Output filters
+    - Load a pretrained pokemon classification model. If the output image is predicted with high probability in one pokemon class, we filter out the output image and return a black image instead.
 
 ### Red Team
 - Generate high-quality images of top 15 Pokémon through:
-  - Black Box Access: Model API interactions
+  - Black Box Access: We modified model API interactions to adversarially prompt model generation of top 15 pokemons via the following 5 classes of attacks:
+    1. `RandomizedDupAndCombAttack` 
+        - With 50% probability, run the letter duplication attack only. Otherwise, run the syllable combination attack.
+        - The letter duplication attack randomly chooses a letter in each word in the input prompt and duplicates it
+        - The syllable combination attack splits the input prompt into syllables and randomly joins them with either a space or a special character.
+    2. `SynonymReplacementAttack`
+        - If the original prompt contains an exact match for any of the top 15 pokemons, replace the token with a suggestive paraphrase to bypass any potential blue team defenses. The paraphrases are precomputed and stored in a lookup dictionary.
+    3. `PermutationAttack`
+        - For each word in the input prompt, randomly swap two letters if the length is greater than 5.
+        - This exploits the error tolerance of word embeddings used by the diffusion model.
+    4. `PermuteAndJoinAttack`
+        - First apply 3) `PermutationAttack` to the prompt, then use the `SyllableCombinationAttack` on the processed prompt.
+    5. `MisspellJoinInjectAttack`
+        - Apply the `LetterSubstitutionAttack` on the prompt, then add the adversarial prefix and suffix to the input prompt 
   - White Box Access: Internal model modifications
+    - Did not implement due to 1) last-minute model change and 2) time constraints
 
 ## Evaluation
 - Success rate in preventing/generating Pokémon
@@ -56,12 +75,42 @@ These three examples will run the base attack and defense teams on the given pro
 - Red Team: Implement attacks in `attacks/`
 - Add your team to `registry.py`
 - Both: Maintain model performance above threshold so that it can still perform well on held-out tasks
+#### 3. Implement your strategy:
+
+### Strat:
+1. **Inject decoy into the prompt**: Add additional unnecessary context
+  - Intended to bypass output filter by lowering attention scores
+  - Examples (to be combined with vanilla word-based techniques on Pokémon names):
+    - "blue, green impressionist / abstract art piikachu"
+    - "a sneaky pikachu, hidden in the forest, obscured by the trees"
+    - "a pikachu in the wild, surrounded by other creatures"
+    - "a tiny pikachu"
+2. **Create prompts that elicit meanings of Pokémon instead of the names themselves** (promising)
+  - Call a Hugging Face API
+  - "Hidden vocabularity" attack
+3. **Exploit words with similar embeddings**: Search for words that lead to similar embeddings (hard or impossible)
+  - "A pikachu in the wild" -> "A {other_word} in the wild"
+  - Essentially argmin of word over loss(embedding(sentence with word) - embedding(sentence with pikachu))
+
+- Blue Team: Enhance methods in `methods/`
+- Red Team: Implement attacks in `attacks/`
+- Add your team to `registry.py`
+- Both: Maintain model performance above threshold so that it can still perform well on held-out tasks
+
+### Strategies to consider:
+- Add **irrelevant objects**
+- String methods - fuzzy matching - typographical similarity
+- Negative prompts(?)
+- CLIP embeddings: similarity between pokemon strings and input prompts
+- Fine-tune known (lightweight) models for a classifier - pokemon or not
+- Attack: split input into CLIP tokens and permute
+- Evil twin prompting: min KL divergence between prompt that leads to the generation of pokemon and optimized prompt using GCG
 
 #### 4. Submit:
+- 5 methods in red team submission give deterministic results
 - Fork repository
 - Add your implementation
 - Document approach in README
-- Each team can submit upto 5 entries in the `registry` as Red Team, and 1 entry in `registry` as Blue Team.
 - Submit pull request
 
 ## Resources
