@@ -4,6 +4,7 @@ BASELINE_METHODS = {
         'BaseRegexFilter': 'methods.input_filters.RegexFilter',
         'BaseWordFilter': 'methods.input_filters.WordFilter',
         'EmeraldPerplexityFilter': 'methods.input_filters.PerplexityFilter'
+        'CaptionFilter': 'methods.input_filters.CaptionFilter',
     },
     'output_filters': {
         'BaseContentDetector': 'methods.output_filters.ContentDetectorFilter',
@@ -21,6 +22,11 @@ BASELINE_METHODS = {
         'CubismStyleAttack': 'attacks.black_box_attack.CubismStyleAttack',
         'TransformerAttack': 'attacks.black_box_attack.TransformerAttack',
         'SimilarTextEmbeddingAttack': 'attacks.black_box_attack.SimilarTextEmbeddingAttack'
+        'TeamPikaAttack1': 'attacks.black_box_attack.TeamPikaAttack1',
+        'TeamPikaAttack2': 'attacks.black_box_attack.TeamPikaAttack2',
+        'TeamPikaAttack3': 'attacks.black_box_attack.TeamPikaAttack3',
+        'TeamPikaAttack4': 'attacks.black_box_attack.TeamPikaAttack4',
+        'TeamPikaAttack5': 'attacks.black_box_attack.TeamPikaAttack5',
     }
 }
 
@@ -76,4 +82,35 @@ STUDENT_TEAMS = {
         'type': 'red',
         'attack': 'CubismStyleAttack'
     }
+}
+    # 'TeamRocket': {
+    #     'type': 'red',
+    #     'attack': 'CustomHomographAttack'
+    # }
+    'TeamPikaDefense': {
+        'type': 'blue',
+        'input_filter': 'CaptionFilter',
+        'output_filter': None,
+        'generate_image_in_input_filter': True
+    },
+    'TeamPikaAttack1': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack1'
+    },
+    'TeamPikaAttack2': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack2'
+    },
+    'TeamPikaAttack3': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack3'
+    },
+    'TeamPikaAttack4': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack4'
+    },
+    'TeamPikaAttack5': {
+        'type': 'red',
+        'attack': 'TeamPikaAttack5'
+    },
 }

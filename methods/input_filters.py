@@ -2,12 +2,19 @@
 
 from .base_method import BaseMethod
 import re
+
 import torch
 import joblib
 from lightgbm import LGBMClassifier
 import lightgbm
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 import numpy as np
+
+from transformers import AutoProcessor, AutoModelForCausalLM
+from unidecode import unidecode
+from PIL import Image
+import torch
+
 
 class InputFilter(BaseMethod):
     def __init__(self):
@@ -84,6 +91,7 @@ class RegexFilter(InputFilter):
             print("Error: 'data/famous_pokemons.txt' not found.")
             forbidden_words = []
         return forbidden_words
+
 
 class PerplexityFilter(InputFilter):
     """
@@ -175,3 +183,73 @@ class PerplexityFilter(InputFilter):
         #     return '[FILTERED]'
             
         return filtered_prompt
+
+class CaptionFilter(InputFilter):
+    def __init__(self):
+        super().__init__()
+
+        # Load Florence 2
+        model_id = "microsoft/Florence-2-large"
+        self.image_caption_model = AutoModelForCausalLM.from_pretrained(model_id, trust_remote_code=True, torch_dtype='auto').eval().cuda()
+        self.image_caption_processor = AutoProcessor.from_pretrained(model_id, trust_remote_code=True)
+
+        self.task_prompt = "<MORE_DETAILED_CAPTION>"
+
+        self.replacements = {
+            "pokemon": "cartoon",
+            "pikachu": "electric mouse",
+            "charizard": "fire dragon",
+            "bulbasaur": "plant toad",
+            "squirtle": "water turtle",
+            "eevee": "evolving fox",
+            "snorlax": "sleeping giant",
+            "meowth": "coin cat",
+            "dragonite": "friendly dragon",
+            "gengar": "shadow ghost",
+            "jigglypuff": "singing balloon",
+            "psyduck": "confused duck",
+            "mudkip": "water mudfish",
+            "blastoise": "water turtle",
+            "ninetales": "mystical fox",
+            "arcanine": "fire canine",
+        }
+
+
+    def replace_words(self, text: str):
+        """
+        Replace words in text according to the replacements dictionary
+        """
+        text = unidecode(text.lower())
+
+        for word, replacement in self.replacements.items():
+            text = text.replace(word, replacement)
+        return text
+
+    def apply(self, prompt: str, generate_image_fn=None):
+
+        if generate_image_fn is None:
+            return prompt
+
+        image = generate_image_fn(prompt)
+
+        image.save("outputs/tmp.png")
+
+        inputs = self.image_caption_processor(text=self.task_prompt, images=image, return_tensors="pt").to('cuda', torch.float16)
+        generated_ids = self.image_caption_model.generate(
+            input_ids=inputs["input_ids"].cuda(),
+            pixel_values=inputs["pixel_values"].cuda(),
+            max_new_tokens=1024,
+            early_stopping=False,
+            do_sample=False,
+            num_beams=3,
+        )
+        generated_text = self.image_caption_processor.batch_decode(generated_ids, skip_special_tokens=False)[0]
+        parsed_answer = self.image_caption_processor.post_process_generation(
+            generated_text,
+            task=self.task_prompt,
+            image_size=(image.width, image.height)
+        )
+        caption = parsed_answer[self.task_prompt]
+        modified_caption = self.replace_words(caption)
+        return modified_caption
+
