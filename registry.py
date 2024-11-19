@@ -4,12 +4,14 @@ BASELINE_METHODS = {
         'NoInputFilter': 'methods.input_filters.InputFilter',
         'BaseRegexFilter': 'methods.input_filters.RegexFilter',
         'BaseWordFilter': 'methods.input_filters.SimpleWordFilter',
-        'EmbeddingFilter': 'methods.ppp_input_filters.EmbeddingFilter'
+        'EmeraldPerplexityFilter': 'methods.input_filters.PerplexityFilter',
+        'EmbeddingFilter': 'methods.ppp_input_filters.EmbeddingFilter',
         'CaptionFilter': 'methods.input_filters.CaptionFilter',
     },
     'output_filters': {
         'NoOutputFilter': 'methods.output_filters.OutputFilter',
         'BaseContentDetector': 'methods.output_filters.ContentDetectorFilter',
+        'EmeraldContentDetector': 'methods.output_filters.ContentDetectorFilter2',
         'ContentClassificationFilter': 'methods.ppp_output_filters.ContentClassificationFilter'
     },
     'model_mods': {
@@ -28,7 +30,7 @@ BASELINE_METHODS = {
         'PezAttack': 'attacks.black_box_attack.PezAttack',
         'CubismStyleAttack': 'attacks.black_box_attack.CubismStyleAttack',
         'TransformerAttack': 'attacks.black_box_attack.TransformerAttack',
-        'SimilarTextEmbeddingAttack': 'attacks.black_box_attack.SimilarTextEmbeddingAttack'
+        'SimilarTextEmbeddingAttack': 'attacks.black_box_attack.SimilarTextEmbeddingAttack',
         'TeamPikaAttack1': 'attacks.black_box_attack.TeamPikaAttack1',
         'TeamPikaAttack2': 'attacks.black_box_attack.TeamPikaAttack2',
         'TeamPikaAttack3': 'attacks.black_box_attack.TeamPikaAttack3',
@@ -94,22 +96,16 @@ STUDENT_TEAMS = {
         'type': 'red',
         'attack': 'CubismStyleAttack'
     },
-    # 'TeamRocket': {
-    #     'type': 'red',
-    #     'attack': 'CustomHomographAttack'
-    # }
     'PichuPixelPatrolBlue': {
        'type': 'blue',
        'input_filter': 'EmbeddingFilter',
        'output_filter': 'ContentClassificationFilter'
    },
-
    'PichuPixelPatrolRed_DupOrComb': {
        'type': 'red',
        'attack': 'RandomizedDupAndCombAttack'
-   },
-
-   'PichuPixelPatrolRed_Synonym': {
+    },
+    'PichuPixelPatrolRed_Synonym': {
        'type': 'red',
        'attack': 'SynonymReplacementAttack'
    },

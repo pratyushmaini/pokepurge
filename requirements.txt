@@ -11,3 +11,5 @@ opacus
 nltk
 einops
 unidecode
+joblib
+lightgbm
